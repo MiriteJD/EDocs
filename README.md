@@ -1,4 +1,4 @@
-# University Project C#
+# University Project CSHARP!
 
 This is a fancy document manager =)
 ---- ---------- ----
