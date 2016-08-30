@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="60b28903-2a3a-4f2b-98a9-d871629a21c6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/Server/DocumentService/" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="0daee748-773f-4f3e-8395-3dd58c05c84f" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Server/DocumentService/?xsd=xsd1" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="3e99ece2-fae2-4d3d-8ef8-ecbc2431274b" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Server/DocumentService/?disco" />
+    <MetadataFile FileName="DocumentService.wsdl" MetadataType="Wsdl" ID="f86aab0d-4078-4e62-8162-51f26f7def49" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Server/DocumentService/?wsdl" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="907eca47-3a7a-481a-a8e8-1d7991dab4ca" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Server/DocumentService/?xsd=xsd0" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="9e3f7048-b21a-4aa8-beb7-cef0c1db6382" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Server/DocumentService/?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
