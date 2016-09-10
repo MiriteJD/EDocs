@@ -67,6 +67,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Container\DocContainer.cs" />
+    <Compile Include="Container\DosContainer.cs" />
     <Compile Include="Container\KeywordContainer.cs" />
     <Compile Include="Controller\MainWindowController.cs" />
     <Compile Include="Program.cs" />

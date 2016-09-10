@@ -3,49 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Client.DocManagementReference;
 
 namespace Client.Container
 {
-    using Client.DocManagementReference;
-    public class KeywordContainer
+    public class DocContainer
     {
-
-        public KeywordContainer(Keyword keyword)
+        public DocContainer(Document document)
         {
-            this.Instanz = keyword;
-
+            this.Instanz = document;
         }
 
-        public KeywordContainer(string name)
+        public DocContainer(string name)
         {
-            Instanz = new Keyword();
+            Instanz = new Document();
             Name = name;
             Version = 1;
         }
 
-        public Keyword Instanz { get; set; }
+        public Document Instanz { get; set; }
 
         public string Name
         {
             get
             {
-                return Instanz.Name;
+                return Instanz.Filename;
             }
             set
             {
-                if (Instanz.Name != value)
+                if (Instanz.Filename != value)
                 {
-                    bool isNew = Instanz.Name == null;
-                    Instanz.Name = string.IsNullOrWhiteSpace(value) ? "Neue Kategorie" : value;
+                    bool isNew = Instanz.Filename == null;
+                    Instanz.Filename = string.IsNullOrWhiteSpace(value) ? "Neues Dokument" : value;
                     if (!isNew)
                     {
-                        Program.Instance.UpdateKeyword(this);
+                        Program.Instance.UpdateDocument(this);
                     }
                 }
             }
         }
 
-      
+
 
         public int Version
         {

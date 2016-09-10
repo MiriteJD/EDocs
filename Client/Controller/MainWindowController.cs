@@ -13,28 +13,19 @@ namespace Client.Controller
 
     public class MainWindowController
     {
-        private MainWindow _oMainWindow;
         private MainWindow _view;
+        private MainViewModel _viewModel;
         private Program _program;
 
 
         public MainWindowController()
         {
+
+            _program = Program.Instance;
             _viewModel = new MainViewModel();
-            _viewModel.AddTaskListCommand = new RelayCommand(AddTaskList);
-            _viewModel.AddTaskCommand = new RelayCommand(AddTask, CanAddTask);
-            _viewModel.DeleteTaskListCommand = new RelayCommand(DeleteTaskList, CanDeleteTaskList);
-            _viewModel.DeleteTaskCommand = new RelayCommand(DeleteTask, CanDeleteTask);
-            _viewModel.ManageTaskCategoriesCommand = new RelayCommand(ManageTaskCategories, CanManageTaskCategories);
-            _viewModel.ManageAvailableCategoriesCommand = new RelayCommand(ManageCategories);
-            _viewModel.ExportTasklistCommand = new RelayCommand(ExportTasklist, CanExportTasklist);
-            _viewModel.ImportTasklistCommand = new RelayCommand(ImportTasklist, CanImportTasklist);
-            _viewModel.SortTasksCommand = new RelayCommand(SortTasks, CanSortTasks);
-            _viewModel.RemoveDueDateCommand = new RelayCommand(RemoveDueDate, CanRemoveDueDate);
-            _viewModel.TaskLists = _program.GetAllTasklists();
             _view = new MainWindow();
             _view.DataContext = _viewModel;
-            _oMainWindow = new MainWindow();
+            _view = new MainWindow();
             
 
 

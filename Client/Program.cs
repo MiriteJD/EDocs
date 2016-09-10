@@ -43,7 +43,7 @@ namespace Client
         /// </summary>
         /// <param name="keyword"></param>
         /// <returns>the new keyword</returns>
-        private KeywordContainer AddnewKeyword(KeywordContainer keyword)
+        public KeywordContainer AddnewKeyword(KeywordContainer keyword)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace Client
         /// </summary>
         /// <param name="keyword"></param>
         /// <returns>success of operation</returns>
-        private bool DeleteKeyword(KeywordContainer keyword)
+        public bool DeleteKeyword(KeywordContainer keyword)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace Client
         /// </summary>
         /// <param name="keyword"></param>
         /// <returns>container of keyword</returns>
-        private KeywordContainer UpdateKeyword(KeywordContainer keyword)
+        public KeywordContainer UpdateKeyword(KeywordContainer keyword)
         {
             try
             {
@@ -100,6 +100,38 @@ namespace Client
                 return null;
             }
         }
+
+        public DocContainer AddnewDoc(DocContainer document, DosContainer dossier)
+        {
+            try
+            {
+                var addDocService = _serviceReference.AddDocumentToDossier(dossier.Instanz ,document.Instanz);
+                return new DocContainer(addDocService);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+                return null;
+            }
+        }
+
+        public DocContainer UpdateDocument(DocContainer document, DosContainer dossier)
+        {
+            try
+            {
+                var updateDocService = _serviceReference.EditDocument()
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+                return null;
+            }
+        }
+
+
+
 
     }
 }
