@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Server.Model
 {
     [DataContract]
-    public class Document:BaseModel
+    public class Document : BaseModel
     {
         [DataMember]
         public string Title { get; set; }
@@ -14,7 +14,7 @@ namespace Server.Model
         public string Comment { get; set; }
 
         [DataMember]
-        public DateTime  CreationDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
         [DataMember]
         public string Path { get; set; }
@@ -29,9 +29,5 @@ namespace Server.Model
 
         [DataMember]
         public IList<Keyword> Keywords { get; set; }
-
-
-
-
     }
 }

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using Client.Controller;
+using Client.DocManagementReference;
 
 namespace Client
 {
@@ -17,8 +19,12 @@ namespace Client
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            MainWindowController controller = new MainWindowController();
+            var controller = new MainWindowController();
+
+
         }
 
     }
+
 }
+

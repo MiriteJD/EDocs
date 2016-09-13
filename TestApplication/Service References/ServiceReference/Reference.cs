@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.DocManagementReference {
+namespace TestApplication.ServiceReference {
     using System.Runtime.Serialization;
     using System;
     
@@ -17,7 +17,7 @@ namespace Client.DocManagementReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Dossier", Namespace="http://schemas.datacontract.org/2004/07/Server.Model")]
     [System.SerializableAttribute()]
-    public partial class Dossier : Client.DocManagementReference.BaseModel {
+    public partial class Dossier : TestApplication.ServiceReference.BaseModel {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CommentField;
@@ -27,9 +27,6 @@ namespace Client.DocManagementReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime CreationDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.DocManagementReference.Document[] DocumentsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -80,19 +77,6 @@ namespace Client.DocManagementReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.DocManagementReference.Document[] Documents {
-            get {
-                return this.DocumentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DocumentsField, value) != true)) {
-                    this.DocumentsField = value;
-                    this.RaisePropertyChanged("Documents");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Name {
             get {
                 return this.NameField;
@@ -136,9 +120,9 @@ namespace Client.DocManagementReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BaseModel", Namespace="http://schemas.datacontract.org/2004/07/Server.Model")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.DocManagementReference.Document))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.DocManagementReference.Keyword))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.DocManagementReference.Dossier))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestApplication.ServiceReference.Document))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestApplication.ServiceReference.Keyword))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TestApplication.ServiceReference.Dossier))]
     public partial class BaseModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -200,7 +184,7 @@ namespace Client.DocManagementReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Document", Namespace="http://schemas.datacontract.org/2004/07/Server.Model")]
     [System.SerializableAttribute()]
-    public partial class Document : Client.DocManagementReference.BaseModel {
+    public partial class Document : TestApplication.ServiceReference.BaseModel {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CommentField;
@@ -215,7 +199,7 @@ namespace Client.DocManagementReference {
         private string FilenameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.DocManagementReference.Keyword[] KeywordsField;
+        private TestApplication.ServiceReference.Keyword[] KeywordsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PathField;
@@ -276,7 +260,7 @@ namespace Client.DocManagementReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.DocManagementReference.Keyword[] Keywords {
+        public TestApplication.ServiceReference.Keyword[] Keywords {
             get {
                 return this.KeywordsField;
             }
@@ -319,26 +303,10 @@ namespace Client.DocManagementReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Keyword", Namespace="http://schemas.datacontract.org/2004/07/Server.Model")]
     [System.SerializableAttribute()]
-    public partial class Keyword : Client.DocManagementReference.BaseModel {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.DocManagementReference.Document[] DocumentsField;
+    public partial class Keyword : TestApplication.ServiceReference.BaseModel {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.DocManagementReference.Document[] Documents {
-            get {
-                return this.DocumentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DocumentsField, value) != true)) {
-                    this.DocumentsField = value;
-                    this.RaisePropertyChanged("Documents");
-                }
-            }
-        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Name {
@@ -355,89 +323,83 @@ namespace Client.DocManagementReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DocManagementReference.IDocumentService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IDocumentService")]
     public interface IDocumentService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllDossiers", ReplyAction="http://tempuri.org/IDocumentService/GetAllDossiersResponse")]
-        Client.DocManagementReference.Dossier[] GetAllDossiers();
+        TestApplication.ServiceReference.Dossier[] GetAllDossiers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllDossiers", ReplyAction="http://tempuri.org/IDocumentService/GetAllDossiersResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Dossier[]> GetAllDossiersAsync();
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier[]> GetAllDossiersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddNewDossier", ReplyAction="http://tempuri.org/IDocumentService/AddNewDossierResponse")]
-        Client.DocManagementReference.Dossier AddNewDossier();
+        TestApplication.ServiceReference.Dossier AddNewDossier();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddNewDossier", ReplyAction="http://tempuri.org/IDocumentService/AddNewDossierResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> AddNewDossierAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/ImportDossier", ReplyAction="http://tempuri.org/IDocumentService/ImportDossierResponse")]
-        Client.DocManagementReference.Dossier ImportDossier(Client.DocManagementReference.Dossier dossier);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/ImportDossier", ReplyAction="http://tempuri.org/IDocumentService/ImportDossierResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> ImportDossierAsync(Client.DocManagementReference.Dossier dossier);
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> AddNewDossierAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditDossier", ReplyAction="http://tempuri.org/IDocumentService/EditDossierResponse")]
-        Client.DocManagementReference.Dossier EditDossier(Client.DocManagementReference.Dossier dossier);
+        TestApplication.ServiceReference.Dossier EditDossier(TestApplication.ServiceReference.Dossier dossier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditDossier", ReplyAction="http://tempuri.org/IDocumentService/EditDossierResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> EditDossierAsync(Client.DocManagementReference.Dossier dossier);
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> EditDossierAsync(TestApplication.ServiceReference.Dossier dossier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteDossier", ReplyAction="http://tempuri.org/IDocumentService/DeleteDossierResponse")]
-        bool DeleteDossier(Client.DocManagementReference.Dossier dossier);
+        bool DeleteDossier(TestApplication.ServiceReference.Dossier dossier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteDossier", ReplyAction="http://tempuri.org/IDocumentService/DeleteDossierResponse")]
-        System.Threading.Tasks.Task<bool> DeleteDossierAsync(Client.DocManagementReference.Dossier dossier);
+        System.Threading.Tasks.Task<bool> DeleteDossierAsync(TestApplication.ServiceReference.Dossier dossier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddDocumentToDossier", ReplyAction="http://tempuri.org/IDocumentService/AddDocumentToDossierResponse")]
-        Client.DocManagementReference.Document AddDocumentToDossier(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document);
+        TestApplication.ServiceReference.Document AddDocumentToDossier(TestApplication.ServiceReference.Dossier dossier, TestApplication.ServiceReference.Document document);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddDocumentToDossier", ReplyAction="http://tempuri.org/IDocumentService/AddDocumentToDossierResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Document> AddDocumentToDossierAsync(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document);
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Document> AddDocumentToDossierAsync(TestApplication.ServiceReference.Dossier dossier, TestApplication.ServiceReference.Document document);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditDocument", ReplyAction="http://tempuri.org/IDocumentService/EditDocumentResponse")]
-        Client.DocManagementReference.Document EditDocument(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document);
+        TestApplication.ServiceReference.Document EditDocument(TestApplication.ServiceReference.Dossier dossier, TestApplication.ServiceReference.Document document);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditDocument", ReplyAction="http://tempuri.org/IDocumentService/EditDocumentResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Document> EditDocumentAsync(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document);
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Document> EditDocumentAsync(TestApplication.ServiceReference.Dossier dossier, TestApplication.ServiceReference.Document document);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteDocument", ReplyAction="http://tempuri.org/IDocumentService/DeleteDocumentResponse")]
-        bool DeleteDocument(Client.DocManagementReference.Document document);
+        bool DeleteDocument(TestApplication.ServiceReference.Document document);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteDocument", ReplyAction="http://tempuri.org/IDocumentService/DeleteDocumentResponse")]
-        System.Threading.Tasks.Task<bool> DeleteDocumentAsync(Client.DocManagementReference.Document document);
+        System.Threading.Tasks.Task<bool> DeleteDocumentAsync(TestApplication.ServiceReference.Document document);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllKeywords", ReplyAction="http://tempuri.org/IDocumentService/GetAllKeywordsResponse")]
-        Client.DocManagementReference.Keyword[] GetAllKeywords();
+        TestApplication.ServiceReference.Keyword[] GetAllKeywords();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllKeywords", ReplyAction="http://tempuri.org/IDocumentService/GetAllKeywordsResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Keyword[]> GetAllKeywordsAsync();
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Keyword[]> GetAllKeywordsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddNewKeyword", ReplyAction="http://tempuri.org/IDocumentService/AddNewKeywordResponse")]
-        Client.DocManagementReference.Keyword AddNewKeyword(Client.DocManagementReference.Keyword keyword);
+        TestApplication.ServiceReference.Keyword AddNewKeyword(TestApplication.ServiceReference.Keyword keyword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddNewKeyword", ReplyAction="http://tempuri.org/IDocumentService/AddNewKeywordResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Keyword> AddNewKeywordAsync(Client.DocManagementReference.Keyword keyword);
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Keyword> AddNewKeywordAsync(TestApplication.ServiceReference.Keyword keyword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditKeyword", ReplyAction="http://tempuri.org/IDocumentService/EditKeywordResponse")]
-        Client.DocManagementReference.Keyword EditKeyword(Client.DocManagementReference.Keyword keyword);
+        TestApplication.ServiceReference.Keyword EditKeyword(TestApplication.ServiceReference.Keyword keyword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditKeyword", ReplyAction="http://tempuri.org/IDocumentService/EditKeywordResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Keyword> EditKeywordAsync(Client.DocManagementReference.Keyword keyword);
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Keyword> EditKeywordAsync(TestApplication.ServiceReference.Keyword keyword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteKeyword", ReplyAction="http://tempuri.org/IDocumentService/DeleteKeywordResponse")]
-        bool DeleteKeyword(Client.DocManagementReference.Keyword keyword);
+        bool DeleteKeyword(TestApplication.ServiceReference.Keyword keyword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteKeyword", ReplyAction="http://tempuri.org/IDocumentService/DeleteKeywordResponse")]
-        System.Threading.Tasks.Task<bool> DeleteKeywordAsync(Client.DocManagementReference.Keyword keyword);
+        System.Threading.Tasks.Task<bool> DeleteKeywordAsync(TestApplication.ServiceReference.Keyword keyword);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IDocumentServiceChannel : Client.DocManagementReference.IDocumentService, System.ServiceModel.IClientChannel {
+    public interface IDocumentServiceChannel : TestApplication.ServiceReference.IDocumentService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DocumentServiceClient : System.ServiceModel.ClientBase<Client.DocManagementReference.IDocumentService>, Client.DocManagementReference.IDocumentService {
+    public partial class DocumentServiceClient : System.ServiceModel.ClientBase<TestApplication.ServiceReference.IDocumentService>, TestApplication.ServiceReference.IDocumentService {
         
         public DocumentServiceClient() {
         }
@@ -458,99 +420,91 @@ namespace Client.DocManagementReference {
                 base(binding, remoteAddress) {
         }
         
-        public Client.DocManagementReference.Dossier[] GetAllDossiers() {
+        public TestApplication.ServiceReference.Dossier[] GetAllDossiers() {
             return base.Channel.GetAllDossiers();
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Dossier[]> GetAllDossiersAsync() {
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier[]> GetAllDossiersAsync() {
             return base.Channel.GetAllDossiersAsync();
         }
         
-        public Client.DocManagementReference.Dossier AddNewDossier() {
+        public TestApplication.ServiceReference.Dossier AddNewDossier() {
             return base.Channel.AddNewDossier();
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> AddNewDossierAsync() {
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> AddNewDossierAsync() {
             return base.Channel.AddNewDossierAsync();
         }
         
-        public Client.DocManagementReference.Dossier ImportDossier(Client.DocManagementReference.Dossier dossier) {
-            return base.Channel.ImportDossier(dossier);
-        }
-        
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> ImportDossierAsync(Client.DocManagementReference.Dossier dossier) {
-            return base.Channel.ImportDossierAsync(dossier);
-        }
-        
-        public Client.DocManagementReference.Dossier EditDossier(Client.DocManagementReference.Dossier dossier) {
+        public TestApplication.ServiceReference.Dossier EditDossier(TestApplication.ServiceReference.Dossier dossier) {
             return base.Channel.EditDossier(dossier);
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> EditDossierAsync(Client.DocManagementReference.Dossier dossier) {
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> EditDossierAsync(TestApplication.ServiceReference.Dossier dossier) {
             return base.Channel.EditDossierAsync(dossier);
         }
         
-        public bool DeleteDossier(Client.DocManagementReference.Dossier dossier) {
+        public bool DeleteDossier(TestApplication.ServiceReference.Dossier dossier) {
             return base.Channel.DeleteDossier(dossier);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteDossierAsync(Client.DocManagementReference.Dossier dossier) {
+        public System.Threading.Tasks.Task<bool> DeleteDossierAsync(TestApplication.ServiceReference.Dossier dossier) {
             return base.Channel.DeleteDossierAsync(dossier);
         }
         
-        public Client.DocManagementReference.Document AddDocumentToDossier(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document) {
+        public TestApplication.ServiceReference.Document AddDocumentToDossier(TestApplication.ServiceReference.Dossier dossier, TestApplication.ServiceReference.Document document) {
             return base.Channel.AddDocumentToDossier(dossier, document);
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Document> AddDocumentToDossierAsync(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document) {
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Document> AddDocumentToDossierAsync(TestApplication.ServiceReference.Dossier dossier, TestApplication.ServiceReference.Document document) {
             return base.Channel.AddDocumentToDossierAsync(dossier, document);
         }
         
-        public Client.DocManagementReference.Document EditDocument(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document) {
+        public TestApplication.ServiceReference.Document EditDocument(TestApplication.ServiceReference.Dossier dossier, TestApplication.ServiceReference.Document document) {
             return base.Channel.EditDocument(dossier, document);
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Document> EditDocumentAsync(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document) {
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Document> EditDocumentAsync(TestApplication.ServiceReference.Dossier dossier, TestApplication.ServiceReference.Document document) {
             return base.Channel.EditDocumentAsync(dossier, document);
         }
         
-        public bool DeleteDocument(Client.DocManagementReference.Document document) {
+        public bool DeleteDocument(TestApplication.ServiceReference.Document document) {
             return base.Channel.DeleteDocument(document);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteDocumentAsync(Client.DocManagementReference.Document document) {
+        public System.Threading.Tasks.Task<bool> DeleteDocumentAsync(TestApplication.ServiceReference.Document document) {
             return base.Channel.DeleteDocumentAsync(document);
         }
         
-        public Client.DocManagementReference.Keyword[] GetAllKeywords() {
+        public TestApplication.ServiceReference.Keyword[] GetAllKeywords() {
             return base.Channel.GetAllKeywords();
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Keyword[]> GetAllKeywordsAsync() {
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Keyword[]> GetAllKeywordsAsync() {
             return base.Channel.GetAllKeywordsAsync();
         }
         
-        public Client.DocManagementReference.Keyword AddNewKeyword(Client.DocManagementReference.Keyword keyword) {
+        public TestApplication.ServiceReference.Keyword AddNewKeyword(TestApplication.ServiceReference.Keyword keyword) {
             return base.Channel.AddNewKeyword(keyword);
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Keyword> AddNewKeywordAsync(Client.DocManagementReference.Keyword keyword) {
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Keyword> AddNewKeywordAsync(TestApplication.ServiceReference.Keyword keyword) {
             return base.Channel.AddNewKeywordAsync(keyword);
         }
         
-        public Client.DocManagementReference.Keyword EditKeyword(Client.DocManagementReference.Keyword keyword) {
+        public TestApplication.ServiceReference.Keyword EditKeyword(TestApplication.ServiceReference.Keyword keyword) {
             return base.Channel.EditKeyword(keyword);
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Keyword> EditKeywordAsync(Client.DocManagementReference.Keyword keyword) {
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Keyword> EditKeywordAsync(TestApplication.ServiceReference.Keyword keyword) {
             return base.Channel.EditKeywordAsync(keyword);
         }
         
-        public bool DeleteKeyword(Client.DocManagementReference.Keyword keyword) {
+        public bool DeleteKeyword(TestApplication.ServiceReference.Keyword keyword) {
             return base.Channel.DeleteKeyword(keyword);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteKeywordAsync(Client.DocManagementReference.Keyword keyword) {
+        public System.Threading.Tasks.Task<bool> DeleteKeywordAsync(TestApplication.ServiceReference.Keyword keyword) {
             return base.Channel.DeleteKeywordAsync(keyword);
         }
     }

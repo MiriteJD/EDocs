@@ -1,4 +1,5 @@
-﻿using FluentNHibernate.Mapping;
+﻿using System;
+using FluentNHibernate.Mapping;
 using Server.Model;
 
 namespace Server.Mappings
@@ -7,8 +8,15 @@ namespace Server.Mappings
     {
         public BaseMap()
         {
-            Id(x => x.Id).GeneratedBy.Increment().Not.Nullable();
-            Version(x => x.Version).Default(1);
+            try
+            {
+                Id(x => x.Id).GeneratedBy.Increment().Not.Nullable().Unique();
+                Version(x => x.Version).Default(1).Not.Nullable();
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
     }
 }

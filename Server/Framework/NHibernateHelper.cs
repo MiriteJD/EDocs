@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
@@ -29,11 +30,19 @@ namespace Server.Framework
 
 		private static void InitializeSessionFactory()
 		{
-			_mSessionFactory = Fluently.Configure()
-				.Database(SQLiteConfiguration.Standard.UsingFile(DatabaseFile).ShowSql())
-				.Mappings(m => m.FluentMappings.AddFromAssembly(Assembly.GetExecutingAssembly())
-				.Conventions.Add(FluentNHibernate.Conventions.Helpers.DefaultLazy.Never()))
-				.BuildSessionFactory();
+            try
+            {
+                _mSessionFactory = Fluently.Configure()
+                        .Database(SQLiteConfiguration.Standard.UsingFile(DatabaseFile).ShowSql())
+                        .Mappings(m => m.FluentMappings.AddFromAssembly(Assembly.GetExecutingAssembly())
+                        .Conventions.Add(FluentNHibernate.Conventions.Helpers.DefaultLazy.Never()))
+                        .BuildSessionFactory();
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
 		}
 	}
 }

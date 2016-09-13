@@ -37,7 +37,7 @@ namespace Client.Container
                     Instanz.Filename = string.IsNullOrWhiteSpace(value) ? "Neues Dokument" : value;
                     if (!isNew)
                     {
-                        Program.Instance.UpdateDocument(this);
+                        //Program.Instance.UpdateDocument(this);
                     }
                 }
             }

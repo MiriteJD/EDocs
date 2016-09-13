@@ -1,4 +1,5 @@
-﻿using FluentNHibernate.Mapping;
+﻿using System;
+using FluentNHibernate.Mapping;
 using Server.Model;
 
 namespace Server.Mappings
@@ -7,10 +8,19 @@ namespace Server.Mappings
     {
         public KeywordMap()
         {
-            Table("Keywords");
-            Map(x => x.Name).Length(50).Not.Nullable().Unique();
+            try
+            {
+                Table("Keywords");
+                Map(x => x.Name).Length(50).Not.Nullable().Unique();
+                HasManyToMany(x => x.Documents).Table("DocumentToKeywordRelation")
+                    .ParentKeyColumn("KeywordId")
+                    .ChildKeyColumn("DocumentId")
+                    .Inverse().Cascade.None();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
     }
 }
-
-

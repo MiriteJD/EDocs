@@ -107,7 +107,8 @@ namespace Server.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Es ist ein fehler aufgetreten. Ihr Dokument konnte leider nicht gelösct werden."+ex);
+                Console.WriteLine("Es ist ein fehler aufgetreten. Ihr Dokument konnte leider nicht gelöscht werden."+ex);
+                Console.ReadLine();
                 return false;
             }
         }

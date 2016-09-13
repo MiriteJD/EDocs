@@ -18,9 +18,6 @@ namespace Server
         Dossier AddNewDossier();
 
         [OperationContract]
-        Dossier ImportDossier(Dossier dossier);
-
-        [OperationContract]
         Dossier EditDossier(Dossier dossier);
 
         [OperationContract]

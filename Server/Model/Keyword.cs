@@ -10,6 +10,7 @@ namespace Server.Model
         [DataMember]
         public string Name { get; set; }
 
+    
         public IList<Document> Documents { get; set; }
 
     }

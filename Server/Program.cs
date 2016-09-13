@@ -17,8 +17,17 @@ namespace Server
 
                 Console.WriteLine($"The service is ready at {baseAddress}");
                 Console.WriteLine("Press <Enter> to stop the service.");
-                Console.ReadLine();
+                //Console.ReadLine();
 
+                IDocumentService service = new DocumentService();
+                var input = service.AddNewDossier();
+                var result = service.GetAllDossiers();
+
+                Console.WriteLine("Name neue Dossier: "+input.Name);
+                Console.WriteLine("All Dossiers: "+result);
+                Console.WriteLine("Count all Dossiers: " +result.Count);
+
+                Console.ReadLine();
                 host.Close();
             }
         }

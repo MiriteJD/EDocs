@@ -100,10 +100,10 @@ namespace Server.Repository
 
         /// <summary>
         /// Schreibt die Kategorie in die Datenbank.
-        /// Lockt die gesamte Tabelle 'Categories' während des Speichervorgangs.
+        /// Lockt die gesamte Tabelle 'Keywords' während des Speichervorgangs.
         /// </summary>
-        /// <param name="category"></param>
-        public void LockSave(Keyword category)
+        /// <param name="keyword"></param>
+        public void LockSave(Keyword keyword)
         {
 
             using (var session = NHibernateHelper.OpenSession())
@@ -112,24 +112,24 @@ namespace Server.Repository
                 {
                     try
                     {
-                        //Lockt gesamte 'Categories' Tabelle um Kategorienamen abzugleichen
-                        session.CreateSQLQuery("SELECT * FROM Categories WITH (tablockx, holdlock)").AddScalar("Id", NHibernateUtil.Int32);
+                        //Lockt gesamte 'Keywords' Tabelle um Kategorienamen abzugleichen
+                        session.CreateSQLQuery("SELECT * FROM Keywords WITH (tablockx, holdlock)").AddScalar("Id", NHibernateUtil.Int32);
 
-                        var originName = category.Name;
+                        var originName = keyword.Name;
                         var nameIndex = 1;
 
-                        while (!CanSave(category))
+                        while (!CanSave(keyword))
                         {
-                            category.Name = string.Concat(originName, $"({nameIndex++})");
+                            keyword.Name = string.Concat(originName, $"({nameIndex++})");
                         }
 
-                        session.Save(category);
+                        session.Save(keyword);
                         transaction.Commit();
                     }
                     catch (Exception e)
                     {
                         transaction.Rollback();
-                        Console.Write("'Save Category' transaction failed.");
+                        Console.Write("'Save Keyword' transaction failed.");
                         Console.WriteLine(e.Message);
                     }
                 }

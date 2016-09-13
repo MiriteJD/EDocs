@@ -1,4 +1,5 @@
-﻿using Client.Container;
+﻿using System.Collections.ObjectModel;
+using Client.Container;
 
 namespace Client
 {
@@ -22,10 +23,7 @@ namespace Client
 
         private static Program _instanz;
 
-        /// <summary>
-		/// Liefert eine DataService-Instanz.
-		/// </summary>
-		/// <returns>Der DataService.</returns>
+      
 		public static Program Instance
         {
             get
@@ -101,11 +99,51 @@ namespace Client
             }
         }
 
+        #region DOSSIERS
+
+
+        public ObservableCollection<DosContainer> GetAllDossiers()
+        {
+            try
+            {
+                var allDosService = _serviceReference.GetAllDossiers();
+                return new ObservableCollection<DosContainer>(allDosService.Select(dosList => new DosContainer(dosList)).ToList());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+                return null;
+            }
+        }
+
+        public DosContainer AddnewDos()
+        {
+            try
+            {
+                //
+                var addDosService = _serviceReference.AddNewDossier();
+                return new DosContainer(addDosService);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+                return null;
+            }
+        }
+
+
+        #endregion
+
+
+
+        #region DOCUMENTS
         public DocContainer AddnewDoc(DocContainer document, DosContainer dossier)
         {
             try
             {
-                var addDocService = _serviceReference.AddDocumentToDossier(dossier.Instanz ,document.Instanz);
+                var addDocService = _serviceReference.AddDocumentToDossier(dossier.Instanz, document.Instanz);
                 return new DocContainer(addDocService);
             }
             catch (Exception ex)
@@ -120,7 +158,8 @@ namespace Client
         {
             try
             {
-                var updateDocService = _serviceReference.EditDocument()
+                var updateDocService = _serviceReference.EditDocument(dossier.Instanz, document.Instanz);
+                return new DocContainer(updateDocService);
             }
             catch (Exception ex)
             {
@@ -131,7 +170,7 @@ namespace Client
         }
 
 
-
+        #endregion
 
     }
 }

@@ -17,7 +17,6 @@ namespace Server
 
         public DocumentService()
         {
-            //Pfad zur Datenbank ermitteln
             var relativePath = @"Database\DocManager.db3";
             string currentPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\"));
             var absolutePath = Path.Combine(currentPath, relativePath);
@@ -27,7 +26,7 @@ namespace Server
             _keywordRepository = new KeywordRepository(absolutePath);
         }
 
-
+        #region DOSSIERS
         public IList<Dossier> GetAllDossiers()
         {
             try
@@ -54,52 +53,8 @@ namespace Server
             catch (Exception ex)
             {
                 Console.Write(ex);
+                return null;
             }
-            return new Dossier();
-
-        }
-
-        public Dossier ImportDossier(Dossier dossier)
-        {
-            try
-            {
-                var newdossier = new Dossier()
-                {
-                    Name = dossier.Name,
-                    Comment = dossier.Comment
-                };
-                var saveddossier = _dossierRepository.Save(newdossier);
-
-                foreach (var document in dossier.Documents)
-                {
-                    var newdocument = new Document()
-                    {
-                        Title = document.Title,
-                        Comment = document.Comment,
-                        CreationDate = document.CreationDate,
-                        Path = document.Path,
-                        Filename = document.Filename,
-                        DossierId = document.DossierId
-                    };
-                    saveddossier.AddDocument(newdocument);
-
-                    newdocument.Keywords = new List<Keyword>();
-                    foreach (var keywordsinList in document.Keywords)
-                    {
-                        keywordsinList.Documents = new List<Document>();
-                        keywordsinList.Documents.Add(newdocument);
-                        newdocument.Keywords.Add(keywordsinList);
-                        _keywordRepository.Save(keywordsinList);
-                    }
-                    EditDocument(saveddossier, newdocument);
-                }
-                return _dossierRepository.Update(saveddossier);
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex);
-            }
-            return new Dossier();
 
         }
 
@@ -133,6 +88,9 @@ namespace Server
                 return false;
             }
         }
+        #endregion
+
+        #region DOCS
 
         public Document AddDocumentToDossier(Dossier dossier, Document document)
         {
@@ -176,6 +134,9 @@ namespace Server
             }
         }
 
+        #endregion
+
+        #region KEYWORDS
         public IList<Keyword> GetAllKeywords()
         {
             try
@@ -228,5 +189,6 @@ namespace Server
                 return false;
             }
         }
+        #endregion
     }
 }
