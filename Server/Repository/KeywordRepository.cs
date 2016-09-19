@@ -5,7 +5,7 @@ using NHibernate.Criterion;
 using Server.Framework;
 using Server.Model;
 
-namespace Server.Repository
+namespace Server
 {
     /// <summary>
     /// Klasse für die Steuerung der Zugriffe auf Kategorien in der Datenbank.
@@ -90,8 +90,9 @@ namespace Server.Repository
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                Console.WriteLine("optimistic save failed: " + ex.Message);
                 keyword.Name = originName;
                 return false;
             }
@@ -99,8 +100,8 @@ namespace Server.Repository
         }
 
         /// <summary>
-        /// Schreibt die Kategorie in die Datenbank.
-        /// Lockt die gesamte Tabelle 'Keywords' während des Speichervorgangs.
+        /// writes kw in database
+        /// locks whole table kws thru process
         /// </summary>
         /// <param name="keyword"></param>
         public void LockSave(Keyword keyword)
@@ -126,11 +127,10 @@ namespace Server.Repository
                         session.Save(keyword);
                         transaction.Commit();
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
                         transaction.Rollback();
-                        Console.Write("'Save Keyword' transaction failed.");
-                        Console.WriteLine(e.Message);
+                        Console.Write("'Save Keyword' transaction failed: " + ex.Message);
                     }
                 }
             }
@@ -141,8 +141,7 @@ namespace Server.Repository
         #region Delete keyword
 
         /// <summary>
-        /// Löscht eine Kategorie asu der Datenbank.
-        /// Implementiert mittels Optimistic Locking.
+        /// deletes kw via optimistic locking
         /// </summary>
         /// <param name="keyword"></param>
         /// <returns></returns>
@@ -154,71 +153,85 @@ namespace Server.Repository
                     return true;
                 return LockDelete(keyword);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine("Beim Löschen der Kategorie ist ein Fehler aufgetreten.");
-                Console.WriteLine(e.Message);
+                Console.WriteLine("delete keyword failed: " + ex.Message);
                 return false;
             }
 
         }
 
         /// <summary>
-        /// Versucht nach Optimistic Locking Pattern die Kategorie aus der Datenbank zu löschen.
-        /// Rückgabe true, wenn der Eintrag asu der Datenbank gelöscht werden konnte.
+        /// tries deleting kw via optimistick lock pattern 
+        /// returns true if kw deleting succeed
         /// </summary>
         /// <param name="keyword"></param>
         /// <returns></returns>
         public bool OptimisticDelete(Keyword keyword)
         {
-            using (var session = NHibernateHelper.OpenSession())
+            try
             {
-                var tx = session.BeginTransaction();
+                using (var session = NHibernateHelper.OpenSession())
+                {
+                    var tx = session.BeginTransaction();
 
-                keyword.Version = keyword.Version + 1;
-                session.Delete(keyword);
-                var currentVersion = GetById(keyword)?.Version;
-                if (keyword.Version > currentVersion && TaskRelationsCleared(keyword))
-                {
-                    tx?.Commit();
-                    return true;
+                    keyword.Version = keyword.Version + 1;
+                    session.Delete(keyword);
+
+                    var currentVersion = GetById(keyword)?.Version;
+                    if (keyword.Version > currentVersion && TaskRelationsCleared(keyword))
+                    {
+                        tx?.Commit();
+                        return true;
+                    }
+                    else
+                    {
+                        tx?.Rollback();
+                        return false;
+                    }
                 }
-                else
-                {
-                    tx?.Rollback();
-                    return false;
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Optimistic Delete failed: " + ex.Message);
+                return false;
             }
         }
 
         public bool LockDelete(Keyword keyword)
         {
-            using (var session = NHibernateHelper.OpenSession())
+            try
             {
-                using (var tx = session.BeginTransaction())
+                using (var session = NHibernateHelper.OpenSession())
                 {
-                    session.Lock(keyword, LockMode.Upgrade);
-                    if (!TaskRelationsCleared(keyword))
-                        return false;
+                    using (var tx = session.BeginTransaction())
+                    {
+                        session.Lock(keyword, LockMode.Upgrade);
+                        if (!TaskRelationsCleared(keyword))
+                            return false;
 
-                    var currentVersion = GetById(keyword)?.Version;
-                    if (currentVersion == null)
-                        return false;
-                    keyword.Version = currentVersion.Value + 1;
+                        var currentVersion = GetById(keyword)?.Version;
+                        if (currentVersion == null)
+                            return false;
+                        keyword.Version = currentVersion.Value + 1;
 
-                    session.Delete(keyword);
-                    tx?.Commit();
-                    return true;
+                        session.Delete(keyword);
+                        tx?.Commit();
+                        return true;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lock Delete failed: " + ex.Message);
+                return false;
             }
         }
 
-      
         public bool TaskRelationsCleared(Keyword keyword)
         {
             try
             {
-
                 using (var session = NHibernateHelper.OpenSession())
                 {
                     var returnList =
@@ -235,10 +248,9 @@ namespace Server.Repository
 
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine("Beim Löschen der Kategorie ist ein Fehler aufgetreten.");
-                Console.WriteLine(e.Message);
+                Console.WriteLine("taskrelationscleared failed. " + ex.Message);
                 return false;
             }
         }

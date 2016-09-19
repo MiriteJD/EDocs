@@ -333,22 +333,28 @@ namespace TestApplication.ServiceReference {
         System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier[]> GetAllDossiersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddNewDossier", ReplyAction="http://tempuri.org/IDocumentService/AddNewDossierResponse")]
-        TestApplication.ServiceReference.Dossier AddNewDossier();
+        TestApplication.ServiceReference.Dossier AddNewDossier(TestApplication.ServiceReference.Dossier dossier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddNewDossier", ReplyAction="http://tempuri.org/IDocumentService/AddNewDossierResponse")]
-        System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> AddNewDossierAsync();
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> AddNewDossierAsync(TestApplication.ServiceReference.Dossier dossier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditDossier", ReplyAction="http://tempuri.org/IDocumentService/EditDossierResponse")]
-        TestApplication.ServiceReference.Dossier EditDossier(TestApplication.ServiceReference.Dossier dossier);
+        TestApplication.ServiceReference.Dossier EditDossier(TestApplication.ServiceReference.Dossier dossier, string name, string comment);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditDossier", ReplyAction="http://tempuri.org/IDocumentService/EditDossierResponse")]
-        System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> EditDossierAsync(TestApplication.ServiceReference.Dossier dossier);
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> EditDossierAsync(TestApplication.ServiceReference.Dossier dossier, string name, string comment);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteDossier", ReplyAction="http://tempuri.org/IDocumentService/DeleteDossierResponse")]
         bool DeleteDossier(TestApplication.ServiceReference.Dossier dossier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteDossier", ReplyAction="http://tempuri.org/IDocumentService/DeleteDossierResponse")]
         System.Threading.Tasks.Task<bool> DeleteDossierAsync(TestApplication.ServiceReference.Dossier dossier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetDossierbyId", ReplyAction="http://tempuri.org/IDocumentService/GetDossierbyIdResponse")]
+        TestApplication.ServiceReference.Dossier GetDossierbyId(int dossierId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetDossierbyId", ReplyAction="http://tempuri.org/IDocumentService/GetDossierbyIdResponse")]
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> GetDossierbyIdAsync(int dossierId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddDocumentToDossier", ReplyAction="http://tempuri.org/IDocumentService/AddDocumentToDossierResponse")]
         TestApplication.ServiceReference.Document AddDocumentToDossier(TestApplication.ServiceReference.Dossier dossier, TestApplication.ServiceReference.Document document);
@@ -367,6 +373,18 @@ namespace TestApplication.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteDocument", ReplyAction="http://tempuri.org/IDocumentService/DeleteDocumentResponse")]
         System.Threading.Tasks.Task<bool> DeleteDocumentAsync(TestApplication.ServiceReference.Document document);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllDocuments", ReplyAction="http://tempuri.org/IDocumentService/GetAllDocumentsResponse")]
+        TestApplication.ServiceReference.Document[] GetAllDocuments();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllDocuments", ReplyAction="http://tempuri.org/IDocumentService/GetAllDocumentsResponse")]
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Document[]> GetAllDocumentsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllDocumentsByDosId", ReplyAction="http://tempuri.org/IDocumentService/GetAllDocumentsByDosIdResponse")]
+        TestApplication.ServiceReference.Document[] GetAllDocumentsByDosId(int dosId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllDocumentsByDosId", ReplyAction="http://tempuri.org/IDocumentService/GetAllDocumentsByDosIdResponse")]
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Document[]> GetAllDocumentsByDosIdAsync(int dosId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllKeywords", ReplyAction="http://tempuri.org/IDocumentService/GetAllKeywordsResponse")]
         TestApplication.ServiceReference.Keyword[] GetAllKeywords();
@@ -391,6 +409,12 @@ namespace TestApplication.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteKeyword", ReplyAction="http://tempuri.org/IDocumentService/DeleteKeywordResponse")]
         System.Threading.Tasks.Task<bool> DeleteKeywordAsync(TestApplication.ServiceReference.Keyword keyword);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllKeywordsByDocId", ReplyAction="http://tempuri.org/IDocumentService/GetAllKeywordsByDocIdResponse")]
+        TestApplication.ServiceReference.Keyword[] GetAllKeywordsByDocId(int docId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllKeywordsByDocId", ReplyAction="http://tempuri.org/IDocumentService/GetAllKeywordsByDocIdResponse")]
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Keyword[]> GetAllKeywordsByDocIdAsync(int docId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -428,20 +452,20 @@ namespace TestApplication.ServiceReference {
             return base.Channel.GetAllDossiersAsync();
         }
         
-        public TestApplication.ServiceReference.Dossier AddNewDossier() {
-            return base.Channel.AddNewDossier();
+        public TestApplication.ServiceReference.Dossier AddNewDossier(TestApplication.ServiceReference.Dossier dossier) {
+            return base.Channel.AddNewDossier(dossier);
         }
         
-        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> AddNewDossierAsync() {
-            return base.Channel.AddNewDossierAsync();
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> AddNewDossierAsync(TestApplication.ServiceReference.Dossier dossier) {
+            return base.Channel.AddNewDossierAsync(dossier);
         }
         
-        public TestApplication.ServiceReference.Dossier EditDossier(TestApplication.ServiceReference.Dossier dossier) {
-            return base.Channel.EditDossier(dossier);
+        public TestApplication.ServiceReference.Dossier EditDossier(TestApplication.ServiceReference.Dossier dossier, string name, string comment) {
+            return base.Channel.EditDossier(dossier, name, comment);
         }
         
-        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> EditDossierAsync(TestApplication.ServiceReference.Dossier dossier) {
-            return base.Channel.EditDossierAsync(dossier);
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> EditDossierAsync(TestApplication.ServiceReference.Dossier dossier, string name, string comment) {
+            return base.Channel.EditDossierAsync(dossier, name, comment);
         }
         
         public bool DeleteDossier(TestApplication.ServiceReference.Dossier dossier) {
@@ -450,6 +474,14 @@ namespace TestApplication.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> DeleteDossierAsync(TestApplication.ServiceReference.Dossier dossier) {
             return base.Channel.DeleteDossierAsync(dossier);
+        }
+        
+        public TestApplication.ServiceReference.Dossier GetDossierbyId(int dossierId) {
+            return base.Channel.GetDossierbyId(dossierId);
+        }
+        
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Dossier> GetDossierbyIdAsync(int dossierId) {
+            return base.Channel.GetDossierbyIdAsync(dossierId);
         }
         
         public TestApplication.ServiceReference.Document AddDocumentToDossier(TestApplication.ServiceReference.Dossier dossier, TestApplication.ServiceReference.Document document) {
@@ -474,6 +506,22 @@ namespace TestApplication.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> DeleteDocumentAsync(TestApplication.ServiceReference.Document document) {
             return base.Channel.DeleteDocumentAsync(document);
+        }
+        
+        public TestApplication.ServiceReference.Document[] GetAllDocuments() {
+            return base.Channel.GetAllDocuments();
+        }
+        
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Document[]> GetAllDocumentsAsync() {
+            return base.Channel.GetAllDocumentsAsync();
+        }
+        
+        public TestApplication.ServiceReference.Document[] GetAllDocumentsByDosId(int dosId) {
+            return base.Channel.GetAllDocumentsByDosId(dosId);
+        }
+        
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Document[]> GetAllDocumentsByDosIdAsync(int dosId) {
+            return base.Channel.GetAllDocumentsByDosIdAsync(dosId);
         }
         
         public TestApplication.ServiceReference.Keyword[] GetAllKeywords() {
@@ -506,6 +554,14 @@ namespace TestApplication.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> DeleteKeywordAsync(TestApplication.ServiceReference.Keyword keyword) {
             return base.Channel.DeleteKeywordAsync(keyword);
+        }
+        
+        public TestApplication.ServiceReference.Keyword[] GetAllKeywordsByDocId(int docId) {
+            return base.Channel.GetAllKeywordsByDocId(docId);
+        }
+        
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Keyword[]> GetAllKeywordsByDocIdAsync(int docId) {
+            return base.Channel.GetAllKeywordsByDocIdAsync(docId);
         }
     }
 }

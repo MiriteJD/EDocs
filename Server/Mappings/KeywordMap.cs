@@ -4,7 +4,7 @@ using Server.Model;
 
 namespace Server.Mappings
 {
-    public class KeywordMap : BaseMap<Dossier>
+    public class KeywordMap : BaseMap<Keyword>
     {
         public KeywordMap()
         {

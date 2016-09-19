@@ -29,9 +29,6 @@ namespace Client.DocManagementReference {
         private System.DateTime CreationDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.DocManagementReference.Document[] DocumentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -75,19 +72,6 @@ namespace Client.DocManagementReference {
                 if ((this.CreationDateField.Equals(value) != true)) {
                     this.CreationDateField = value;
                     this.RaisePropertyChanged("CreationDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.DocManagementReference.Document[] Documents {
-            get {
-                return this.DocumentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DocumentsField, value) != true)) {
-                    this.DocumentsField = value;
-                    this.RaisePropertyChanged("Documents");
                 }
             }
         }
@@ -322,23 +306,7 @@ namespace Client.DocManagementReference {
     public partial class Keyword : Client.DocManagementReference.BaseModel {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.DocManagementReference.Document[] DocumentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.DocManagementReference.Document[] Documents {
-            get {
-                return this.DocumentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DocumentsField, value) != true)) {
-                    this.DocumentsField = value;
-                    this.RaisePropertyChanged("Documents");
-                }
-            }
-        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Name {
@@ -370,12 +338,6 @@ namespace Client.DocManagementReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddNewDossier", ReplyAction="http://tempuri.org/IDocumentService/AddNewDossierResponse")]
         System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> AddNewDossierAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/ImportDossier", ReplyAction="http://tempuri.org/IDocumentService/ImportDossierResponse")]
-        Client.DocManagementReference.Dossier ImportDossier(Client.DocManagementReference.Dossier dossier);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/ImportDossier", ReplyAction="http://tempuri.org/IDocumentService/ImportDossierResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> ImportDossierAsync(Client.DocManagementReference.Dossier dossier);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditDossier", ReplyAction="http://tempuri.org/IDocumentService/EditDossierResponse")]
         Client.DocManagementReference.Dossier EditDossier(Client.DocManagementReference.Dossier dossier);
         
@@ -387,6 +349,12 @@ namespace Client.DocManagementReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteDossier", ReplyAction="http://tempuri.org/IDocumentService/DeleteDossierResponse")]
         System.Threading.Tasks.Task<bool> DeleteDossierAsync(Client.DocManagementReference.Dossier dossier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetbyID", ReplyAction="http://tempuri.org/IDocumentService/GetbyIDResponse")]
+        Client.DocManagementReference.Dossier GetbyID(int dossierID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetbyID", ReplyAction="http://tempuri.org/IDocumentService/GetbyIDResponse")]
+        System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> GetbyIDAsync(int dossierID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddDocumentToDossier", ReplyAction="http://tempuri.org/IDocumentService/AddDocumentToDossierResponse")]
         Client.DocManagementReference.Document AddDocumentToDossier(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document);
@@ -474,14 +442,6 @@ namespace Client.DocManagementReference {
             return base.Channel.AddNewDossierAsync();
         }
         
-        public Client.DocManagementReference.Dossier ImportDossier(Client.DocManagementReference.Dossier dossier) {
-            return base.Channel.ImportDossier(dossier);
-        }
-        
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> ImportDossierAsync(Client.DocManagementReference.Dossier dossier) {
-            return base.Channel.ImportDossierAsync(dossier);
-        }
-        
         public Client.DocManagementReference.Dossier EditDossier(Client.DocManagementReference.Dossier dossier) {
             return base.Channel.EditDossier(dossier);
         }
@@ -496,6 +456,14 @@ namespace Client.DocManagementReference {
         
         public System.Threading.Tasks.Task<bool> DeleteDossierAsync(Client.DocManagementReference.Dossier dossier) {
             return base.Channel.DeleteDossierAsync(dossier);
+        }
+        
+        public Client.DocManagementReference.Dossier GetbyID(int dossierID) {
+            return base.Channel.GetbyID(dossierID);
+        }
+        
+        public System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> GetbyIDAsync(int dossierID) {
+            return base.Channel.GetbyIDAsync(dossierID);
         }
         
         public Client.DocManagementReference.Document AddDocumentToDossier(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document) {

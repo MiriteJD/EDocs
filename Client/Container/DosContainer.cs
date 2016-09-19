@@ -63,10 +63,10 @@ namespace Client.Container
             }
         }
 
-        public int CountEntries
-        {
-            get { return Instanz.Documents.Length; }
-        }
+        //public int CountEntries
+        //{
+        //    get { return Instanz.Documents.Length; }
+        //}
 
         public void AddTask(DocContainer document)
         {

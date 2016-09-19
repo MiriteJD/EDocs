@@ -2,7 +2,7 @@
 using Server.Framework;
 using Server.Model;
 
-namespace Server.Repository
+namespace Server
 {
     public class DocumentRepository : Repository<Document>
     {

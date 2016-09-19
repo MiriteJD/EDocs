@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using FluentNHibernate.Mapping;
 using Server.Model;
 
@@ -10,7 +11,7 @@ namespace Server.Mappings
         {
             try
             {
-                Id(x => x.Id).GeneratedBy.Increment().Not.Nullable().Unique();
+                Id(x => x.Id).GeneratedBy.Native().Not.Nullable().Unique();
                 Version(x => x.Version).Default(1).Not.Nullable();
             }
             catch (System.Exception ex)

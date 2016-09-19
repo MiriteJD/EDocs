@@ -2,7 +2,7 @@
 using Server.Framework;
 using Server.Model;
 
-namespace Server.Repository
+namespace Server
 {
 
     public class DossierRepository : Repository<Dossier>
@@ -30,7 +30,7 @@ namespace Server.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Es ist ein fehler aufgetreten. Ihre Akte konnte leider nicht aktualisiert werden." + ex);
+                Console.WriteLine("Es ist ein fehler aufgetreten. Ihre Akte konnte leider nicht aktualisiert werden. " + ex);
             }
             return entity;
         }
@@ -43,8 +43,9 @@ namespace Server.Repository
                 {
                     using (var tx = session.BeginTransaction())
                     {
-                        var currentVersion = GetById(entity)?.Version;
-                        entity.Version = currentVersion.Value + 1;
+                        //var currentVersion = GetById(entity)?.Version;
+                        //currentVersion = currentVersion ?? 1;
+                        //entity.Version = currentVersion.Value;
                         session.Delete(entity);
                         tx?.Commit();
                         return true;

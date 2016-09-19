@@ -25,9 +25,10 @@ namespace Server.Model
         [DataMember]
         public int DossierId { get; set; }
 
-        public Dossier DossierList { get; set; }
-
         [DataMember]
         public IList<Keyword> Keywords { get; set; }
+
+        public Dossier DossierList { get; set; }
+
     }
 }

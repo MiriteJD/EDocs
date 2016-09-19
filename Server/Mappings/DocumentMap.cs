@@ -16,11 +16,12 @@ namespace Server.Mappings
                 Map(x => x.CreationDate).Not.Nullable();
                 Map(x => x.Path).Length(260).Nullable().Unique();
                 Map(x => x.Filename).Length(260).Not.Nullable();
+                Map(x => x.DossierId).Not.Nullable();
                 References(x => x.DossierList).Column("DossierId").LazyLoad().Cascade.None();
                 HasManyToMany(x => x.Keywords).Table("DocumentToKeywordRelation")
-                                               .ParentKeyColumn("DocumentId")
-                                               .ChildKeyColumn("KeywordId")
-                                               .Cascade.SaveUpdate();
+                    .ParentKeyColumn("DocumentId")
+                    .ChildKeyColumn("KeywordId")
+                    .Cascade.SaveUpdate();
             }
             catch (Exception ex)
             {

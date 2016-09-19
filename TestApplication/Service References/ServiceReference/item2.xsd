@@ -60,4 +60,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="Keyword" nillable="true" type="tns:Keyword" />
+  <xs:complexType name="ArrayOfDocument">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Document" nillable="true" type="tns:Document" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDocument" nillable="true" type="tns:ArrayOfDocument" />
 </xs:schema>

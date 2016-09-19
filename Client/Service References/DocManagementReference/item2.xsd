@@ -13,7 +13,6 @@
           <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Counter" type="xs:int" />
           <xs:element minOccurs="0" name="CreationDate" type="xs:dateTime" />
-          <xs:element minOccurs="0" name="Documents" nillable="true" type="tns:ArrayOfDocument" />
           <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Nr" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Year" type="xs:int" />
@@ -29,12 +28,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BaseModel" nillable="true" type="tns:BaseModel" />
-  <xs:complexType name="ArrayOfDocument">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Document" nillable="true" type="tns:Document" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfDocument" nillable="true" type="tns:ArrayOfDocument" />
   <xs:complexType name="Document">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseModel">
@@ -61,7 +54,6 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseModel">
         <xs:sequence>
-          <xs:element minOccurs="0" name="Documents" nillable="true" type="tns:ArrayOfDocument" />
           <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
