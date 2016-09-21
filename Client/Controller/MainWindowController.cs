@@ -28,7 +28,7 @@ namespace Client.Controller
             _view = new MainWindow();
             //_view.DataContext = _viewModel;
             _view = new MainWindow();
-            _view.listBox.DataContext = _program.GetAllDossiers();
+            //_view.listBox.DataContext = _program.GetAllDossiers();
 
             _view.ShowDialog();
 

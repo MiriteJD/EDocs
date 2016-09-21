@@ -1,29 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Client.DocManagementReference;
+﻿
 
 namespace Client.Container
 {
+    using Client.DocManagementReference;
     public class DocContainer
     {
         public DocContainer(Document document)
         {
-            this.Instanz = document;
+            Instanz = document;
         }
 
         public DocContainer(string name)
         {
             Instanz = new Document();
-            Name = name;
+            Filename = name;
             Version = 1;
+            
         }
 
         public Document Instanz { get; set; }
 
-        public string Name
+        public string Filename
         {
             get
             {
@@ -31,15 +28,7 @@ namespace Client.Container
             }
             set
             {
-                if (Instanz.Filename != value)
-                {
-                    bool isNew = Instanz.Filename == null;
-                    Instanz.Filename = string.IsNullOrWhiteSpace(value) ? "Neues Dokument" : value;
-                    if (!isNew)
-                    {
-                        //Program.Instance.UpdateDocument(this);
-                    }
-                }
+                Instanz.Filename = value;
             }
         }
 
@@ -56,8 +45,5 @@ namespace Client.Container
                 Instanz.Version = value;
             }
         }
-
-
-
     }
 }

@@ -24,13 +24,25 @@ namespace Server
                 Console.WriteLine("Press <Enter> to stop the service.");
 
 
-                DocumentService service = new DocumentService();
-                //var teskw = service.GetKeywordbyId(6);
-                var result = service.DeleteKeyword(teskw);
-                Console.WriteLine("deleting test kw3(1) status : " + result);
+                //DocumentService service = new DocumentService();
+
+                //var teskw = new Keyword();
+             
+
+                //var all = service.GetAllKeywords();
+                //foreach (var kw in all)
+                //{
+                //    if (kw.Id == 6) teskw = kw;
+                //}
+
+                //var result = service.DeleteKeyword(teskw);
+                
+                //Console.WriteLine("deleting test kw3(1) status : " + result);
 
 
                 Console.ReadLine();
+
+                // Close the ServiceHost after finish
                 host.Close();
             }
         }

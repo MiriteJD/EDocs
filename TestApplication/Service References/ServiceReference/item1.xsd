@@ -209,4 +209,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetKeywordbyId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetKeywordbyIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Server.Model" minOccurs="0" name="GetKeywordbyIdResult" nillable="true" type="q24:Keyword" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

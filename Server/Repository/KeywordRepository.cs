@@ -8,7 +8,7 @@ using Server.Model;
 namespace Server
 {
     /// <summary>
-    /// Klasse für die Steuerung der Zugriffe auf Kategorien in der Datenbank.
+    /// 
     /// </summary>
     public class KeywordRepository : Repository<Keyword>
     {
@@ -28,6 +28,7 @@ namespace Server
         /// <returns></returns>
         public override Keyword Save(Keyword keyword)
         {
+            keyword.Name = keyword.Name.ToLower();
             var categorySaved = OptimisticSave(keyword);
             if (!categorySaved)
             {
@@ -138,122 +139,122 @@ namespace Server
         }
         #endregion
 
-        #region Delete keyword
+       
 
-        /// <summary>
-        /// deletes kw via optimistic locking
-        /// </summary>
-        /// <param name="keyword"></param>
-        /// <returns></returns>
-        public override bool Delete(Keyword keyword)
-        {
-            try
-            {
-                if (OptimisticDelete(keyword))
-                    return true;
-                return LockDelete(keyword);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("delete keyword failed: " + ex.Message);
-                return false;
-            }
+        ///// <summary>
+        ///// deletes kw via optimistic locking
+        ///// </summary>
+        ///// <param name="keyword"></param>
+        ///// <returns></returns>
+        //public override bool Delete(Keyword keyword)
+        //{
+        //    try
+        //    {
+        //        if (OptimisticDelete(keyword))
+        //            return true;
+        //        return LockDelete(keyword);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("delete keyword failed: " + ex.Message);
+        //        return false;
+        //    }
 
-        }
+        //}
 
-        /// <summary>
-        /// tries deleting kw via optimistick lock pattern 
-        /// returns true if kw deleting succeed
-        /// </summary>
-        /// <param name="keyword"></param>
-        /// <returns></returns>
-        public bool OptimisticDelete(Keyword keyword)
-        {
-            try
-            {
-                using (var session = NHibernateHelper.OpenSession())
-                {
-                    var tx = session.BeginTransaction();
+        ///// <summary>
+        ///// tries deleting kw via optimistick lock pattern 
+        ///// returns true if kw deleting succeed
+        ///// </summary>
+        ///// <param name="keyword"></param>
+        ///// <returns></returns>
+        //public bool OptimisticDelete(Keyword keyword)
+        //{
+        //    try
+        //    {
+        //        using (var session = NHibernateHelper.OpenSession())
+        //        {
+        //            var tx = session.BeginTransaction();
 
-                    keyword.Version = keyword.Version + 1;
-                    session.Delete(keyword);
+        //            keyword.Version = keyword.Version + 1;
+        //            session.Delete(keyword);
 
-                    var currentVersion = GetById(keyword)?.Version;
-                    if (keyword.Version > currentVersion && TaskRelationsCleared(keyword))
-                    {
-                        tx?.Commit();
-                        return true;
-                    }
-                    else
-                    {
-                        tx?.Rollback();
-                        return false;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Optimistic Delete failed: " + ex.Message);
-                return false;
-            }
-        }
+        //            var currentVersion = GetById(keyword)?.Version;
+        //            if (keyword.Version > currentVersion && TaskRelationsCleared(keyword))
+        //            {
+        //                tx?.Commit();
+        //                return true;
+        //            }
+        //            else
+        //            {
+        //                tx?.Rollback();
+        //                return false;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("Optimistic Delete failed: " + ex.Message);
+        //        return false;
+        //    }
+        //}
 
-        public bool LockDelete(Keyword keyword)
-        {
-            try
-            {
-                using (var session = NHibernateHelper.OpenSession())
-                {
-                    using (var tx = session.BeginTransaction())
-                    {
-                        session.Lock(keyword, LockMode.Upgrade);
-                        if (!TaskRelationsCleared(keyword))
-                            return false;
+        //public bool LockDelete(Keyword keyword)
+        //{
+        //    try
+        //    {
+        //        using (var session = NHibernateHelper.OpenSession())
+        //        {
+        //            using (var tx = session.BeginTransaction())
+        //            {
+        //                session.Lock(keyword, LockMode.Upgrade);
+        //                if (!TaskRelationsCleared(keyword))
+        //                    return false;
 
-                        var currentVersion = GetById(keyword)?.Version;
-                        if (currentVersion == null)
-                            return false;
-                        keyword.Version = currentVersion.Value + 1;
+        //                var currentVersion = GetById(keyword)?.Version;
+        //                if (currentVersion == null)
+        //                    return false;
+        //                keyword.Version = currentVersion.Value + 1;
 
-                        session.Delete(keyword);
-                        tx?.Commit();
-                        return true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Lock Delete failed: " + ex.Message);
-                return false;
-            }
-        }
+        //                session.Delete(keyword);
+        //                tx?.Commit();
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("Lock Delete failed: " + ex.Message);
+        //        return false;
+        //    }
+        //}
 
-        public bool TaskRelationsCleared(Keyword keyword)
-        {
-            try
-            {
-                using (var session = NHibernateHelper.OpenSession())
-                {
-                    var returnList =
-                        session.CreateCriteria<Keyword>()
-                            .Add(Restrictions.Eq("Id", keyword.Id))
-                            .List<Keyword>();
-                    if (returnList.Count != 1)
-                        return false;
+        //public bool TaskRelationsCleared(Keyword keyword)
+        //{
+        //    try
+        //    {
+        //        using (var session = NHibernateHelper.OpenSession())
+        //        {
+        //            var returnList =
+        //                session.CreateCriteria<Keyword>()
+        //                    .Add(Restrictions.Eq("Id", keyword.Id))
+        //                    .List<Keyword>();
+        //            if (returnList.Count != 1)
+        //                return false;
 
-                    var kewrd = returnList.FirstOrDefault();
-                    if (kewrd?.Documents?.Count != 0)
-                        return false;
-                    return true;
+        //            var kewrd = returnList.FirstOrDefault();
+        //            if (kewrd?.Documents?.Count != 0)
+        //                return false;
+        //            return true;
 
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("taskrelationscleared failed. " + ex.Message);
-                return false;
-            }
-        }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("taskrelationscleared failed. " + ex.Message);
+        //        return false;
+        //    }
+        //}
 
         #endregion
 

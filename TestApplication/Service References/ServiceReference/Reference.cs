@@ -415,6 +415,12 @@ namespace TestApplication.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllKeywordsByDocId", ReplyAction="http://tempuri.org/IDocumentService/GetAllKeywordsByDocIdResponse")]
         System.Threading.Tasks.Task<TestApplication.ServiceReference.Keyword[]> GetAllKeywordsByDocIdAsync(int docId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetKeywordbyId", ReplyAction="http://tempuri.org/IDocumentService/GetKeywordbyIdResponse")]
+        TestApplication.ServiceReference.Keyword GetKeywordbyId(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetKeywordbyId", ReplyAction="http://tempuri.org/IDocumentService/GetKeywordbyIdResponse")]
+        System.Threading.Tasks.Task<TestApplication.ServiceReference.Keyword> GetKeywordbyIdAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -562,6 +568,14 @@ namespace TestApplication.ServiceReference {
         
         public System.Threading.Tasks.Task<TestApplication.ServiceReference.Keyword[]> GetAllKeywordsByDocIdAsync(int docId) {
             return base.Channel.GetAllKeywordsByDocIdAsync(docId);
+        }
+        
+        public TestApplication.ServiceReference.Keyword GetKeywordbyId(int id) {
+            return base.Channel.GetKeywordbyId(id);
+        }
+        
+        public System.Threading.Tasks.Task<TestApplication.ServiceReference.Keyword> GetKeywordbyIdAsync(int id) {
+            return base.Channel.GetKeywordbyIdAsync(id);
         }
     }
 }

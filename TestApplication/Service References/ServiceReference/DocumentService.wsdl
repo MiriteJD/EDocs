@@ -666,6 +666,44 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IDocumentService_GetKeywordbyId_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IDocumentService_GetKeywordbyId_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/Server/DocumentService/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -763,6 +801,12 @@
   <wsdl:message name="IDocumentService_GetAllKeywordsByDocId_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllKeywordsByDocIdResponse" />
   </wsdl:message>
+  <wsdl:message name="IDocumentService_GetKeywordbyId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetKeywordbyId" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentService_GetKeywordbyId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetKeywordbyIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="IDocumentService">
     <wsdl:operation name="GetAllDossiers">
       <wsdl:input wsaw:Action="http://tempuri.org/IDocumentService/GetAllDossiers" message="tns:IDocumentService_GetAllDossiers_InputMessage" />
@@ -823,6 +867,10 @@
     <wsdl:operation name="GetAllKeywordsByDocId">
       <wsdl:input wsaw:Action="http://tempuri.org/IDocumentService/GetAllKeywordsByDocId" message="tns:IDocumentService_GetAllKeywordsByDocId_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDocumentService/GetAllKeywordsByDocIdResponse" message="tns:IDocumentService_GetAllKeywordsByDocId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetKeywordbyId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentService/GetKeywordbyId" message="tns:IDocumentService_GetKeywordbyId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentService/GetKeywordbyIdResponse" message="tns:IDocumentService_GetKeywordbyId_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IDocumentService" type="tns:IDocumentService">
@@ -990,6 +1038,17 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_IDocumentService_GetAllKeywordsByDocId_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKeywordbyId">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentService/GetKeywordbyId" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IDocumentService_GetKeywordbyId_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IDocumentService_GetKeywordbyId_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
