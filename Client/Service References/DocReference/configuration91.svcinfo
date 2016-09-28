@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="+e+kcgKMECkSnyG4jMdRZhZtZmg=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="zA86jELt9NtySoJXCNCB4uvvkMo=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="wsHttpBinding" name="WSHttpBinding_IDocumentService">
       <properties>
@@ -127,7 +127,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="WSHttpBinding_IDocumentService" contract="DocManagementReference.IDocumentService" bindingType="wsHttpBinding" address="http://localhost:8733/Design_Time_Addresses/Server/DocumentService/" bindingConfiguration="WSHttpBinding_IDocumentService">
+    <endpoint name="WSHttpBinding_IDocumentService" contract="DocReference.IDocumentService" bindingType="wsHttpBinding" address="http://localhost:8733/Design_Time_Addresses/Server/DocumentService/" bindingConfiguration="WSHttpBinding_IDocumentService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:8733/Design_Time_Addresses/Server/DocumentService/</serializedValue>
@@ -142,7 +142,7 @@
           <serializedValue>WSHttpBinding_IDocumentService</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>DocManagementReference.IDocumentService</serializedValue>
+          <serializedValue>DocReference.IDocumentService</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>

@@ -1,22 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using TestApplication.ServiceReference;
 
 namespace TestApplication
 {
-    public class Program
+    public static class Program
     {
+        public static IList<Dossier> Items;
 
-        public static IList<Dossier> Items { get; set; }
+
+        private static DocumentServiceClient _test;
+
+        private static bool IsServiceRunning => _test.State == CommunicationState.Opened || _test.State == CommunicationState.Created;
+
+
         public static void Main(string[] args)
         {
             try
             {
-                var test = new DocumentServiceClient();
-                
+                _test = new DocumentServiceClient();
+                if (IsServiceRunning)
+                {
+                    Items = _test.GetAllDossiers();
+                }
 
-                Items = test.GetAllDossiers();
+               
 
             }
             catch (Exception ex)

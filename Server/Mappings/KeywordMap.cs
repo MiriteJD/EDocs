@@ -16,6 +16,7 @@ namespace Server.Mappings
                     .ParentKeyColumn("KeywordId")
                     .ChildKeyColumn("DocumentId")
                     .Inverse().Cascade.None();
+
             }
             catch (Exception ex)
             {

@@ -38,7 +38,7 @@
     <StartupObject>Client.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Document2.ico</ApplicationIcon>
+    <ApplicationIcon>Style\pic\Document2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -65,6 +65,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\KeywordsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -76,19 +80,21 @@
     <Compile Include="Container\DocContainer.cs" />
     <Compile Include="Container\DosContainer.cs" />
     <Compile Include="Container\KeywordContainer.cs" />
+    <Compile Include="Controller\KWController.cs" />
     <Compile Include="Controller\MainWindowController.cs" />
-    <Compile Include="Framework\CommandBinding.cs" />
-    <Compile Include="Framework\NPC.cs" />
+    <Compile Include="Framework\RelayCommand.cs" />
+    <Compile Include="Framework\ViewModelBase.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Service References\DocManagementReference\Reference.cs">
+    <Compile Include="Service References\DocReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="ViewContainer\ContainerDocuments.cs" />
-    <Compile Include="ViewContainer\ContainerDossiers.cs" />
-    <Compile Include="ViewContainer\ContainerKeywords.cs" />
+    <Compile Include="ViewModels\KWViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\KeywordsWindow.xaml.cs">
+      <DependentUpon>KeywordsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -117,23 +123,23 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\DocManagementReference\Client.DocManagementReference.Document.datasource">
+    <None Include="Service References\DocReference\Client.DocReference.Document.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DocManagementReference\Client.DocManagementReference.Dossier.datasource">
+    <None Include="Service References\DocReference\Client.DocReference.Dossier.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DocManagementReference\Client.DocManagementReference.Keyword.datasource">
+    <None Include="Service References\DocReference\Client.DocReference.Keyword.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\DocManagementReference\DocumentService.wsdl" />
-    <None Include="Service References\DocManagementReference\item.xsd">
+    <None Include="Service References\DocReference\DocumentService.wsdl" />
+    <None Include="Service References\DocReference\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DocManagementReference\item1.xsd">
+    <None Include="Service References\DocReference\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DocManagementReference\item2.xsd">
+    <None Include="Service References\DocReference\item2.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -141,31 +147,46 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Style\" />
+    <WCFMetadataStorage Include="Service References\DocReference\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\DocManagementReference\" />
+    <Resource Include="Style\pic\Document2.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\DocManagementReference\item.disco" />
+    <None Include="Service References\DocReference\item.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\DocManagementReference\configuration91.svcinfo" />
+    <None Include="Service References\DocReference\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\DocManagementReference\configuration.svcinfo" />
+    <None Include="Service References\DocReference\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\DocManagementReference\Reference.svcmap">
+    <None Include="Service References\DocReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Document2.ico" />
+    <Resource Include="Style\pic\Icons\edit-delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\pic\Icons\folder-new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\pic\Icons\document-close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\pic\Icons\document-edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\pic\Icons\archive-insert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\pic\Icons\document-open.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

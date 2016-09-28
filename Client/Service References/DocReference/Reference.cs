@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.DocManagementReference {
+namespace Client.DocReference {
     using System.Runtime.Serialization;
     using System;
     
@@ -17,7 +17,7 @@ namespace Client.DocManagementReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Dossier", Namespace="http://schemas.datacontract.org/2004/07/Server.Model")]
     [System.SerializableAttribute()]
-    public partial class Dossier : Client.DocManagementReference.BaseModel {
+    public partial class Dossier : Client.DocReference.BaseModel {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CommentField;
@@ -27,6 +27,9 @@ namespace Client.DocManagementReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime CreationDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.DocReference.Document[] DocumentsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -77,6 +80,19 @@ namespace Client.DocManagementReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.DocReference.Document[] Documents {
+            get {
+                return this.DocumentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentsField, value) != true)) {
+                    this.DocumentsField = value;
+                    this.RaisePropertyChanged("Documents");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Name {
             get {
                 return this.NameField;
@@ -120,9 +136,9 @@ namespace Client.DocManagementReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BaseModel", Namespace="http://schemas.datacontract.org/2004/07/Server.Model")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.DocManagementReference.Document))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.DocManagementReference.Keyword))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.DocManagementReference.Dossier))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.DocReference.Document))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.DocReference.Keyword))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.DocReference.Dossier))]
     public partial class BaseModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -184,7 +200,7 @@ namespace Client.DocManagementReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Document", Namespace="http://schemas.datacontract.org/2004/07/Server.Model")]
     [System.SerializableAttribute()]
-    public partial class Document : Client.DocManagementReference.BaseModel {
+    public partial class Document : Client.DocReference.BaseModel {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CommentField;
@@ -199,7 +215,7 @@ namespace Client.DocManagementReference {
         private string FilenameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.DocManagementReference.Keyword[] KeywordsField;
+        private Client.DocReference.Keyword[] KeywordsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PathField;
@@ -260,7 +276,7 @@ namespace Client.DocManagementReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.DocManagementReference.Keyword[] Keywords {
+        public Client.DocReference.Keyword[] Keywords {
             get {
                 return this.KeywordsField;
             }
@@ -303,7 +319,7 @@ namespace Client.DocManagementReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Keyword", Namespace="http://schemas.datacontract.org/2004/07/Server.Model")]
     [System.SerializableAttribute()]
-    public partial class Keyword : Client.DocManagementReference.BaseModel {
+    public partial class Keyword : Client.DocReference.BaseModel {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -323,89 +339,113 @@ namespace Client.DocManagementReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DocManagementReference.IDocumentService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DocReference.IDocumentService")]
     public interface IDocumentService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllDossiers", ReplyAction="http://tempuri.org/IDocumentService/GetAllDossiersResponse")]
-        Client.DocManagementReference.Dossier[] GetAllDossiers();
+        Client.DocReference.Dossier[] GetAllDossiers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllDossiers", ReplyAction="http://tempuri.org/IDocumentService/GetAllDossiersResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Dossier[]> GetAllDossiersAsync();
+        System.Threading.Tasks.Task<Client.DocReference.Dossier[]> GetAllDossiersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddNewDossier", ReplyAction="http://tempuri.org/IDocumentService/AddNewDossierResponse")]
-        Client.DocManagementReference.Dossier AddNewDossier();
+        Client.DocReference.Dossier AddNewDossier(Client.DocReference.Dossier dossier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddNewDossier", ReplyAction="http://tempuri.org/IDocumentService/AddNewDossierResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> AddNewDossierAsync();
+        System.Threading.Tasks.Task<Client.DocReference.Dossier> AddNewDossierAsync(Client.DocReference.Dossier dossier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditDossier", ReplyAction="http://tempuri.org/IDocumentService/EditDossierResponse")]
-        Client.DocManagementReference.Dossier EditDossier(Client.DocManagementReference.Dossier dossier);
+        Client.DocReference.Dossier EditDossier(Client.DocReference.Dossier dossier, string name, string comment);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditDossier", ReplyAction="http://tempuri.org/IDocumentService/EditDossierResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> EditDossierAsync(Client.DocManagementReference.Dossier dossier);
+        System.Threading.Tasks.Task<Client.DocReference.Dossier> EditDossierAsync(Client.DocReference.Dossier dossier, string name, string comment);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteDossier", ReplyAction="http://tempuri.org/IDocumentService/DeleteDossierResponse")]
-        bool DeleteDossier(Client.DocManagementReference.Dossier dossier);
+        bool DeleteDossier(Client.DocReference.Dossier dossier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteDossier", ReplyAction="http://tempuri.org/IDocumentService/DeleteDossierResponse")]
-        System.Threading.Tasks.Task<bool> DeleteDossierAsync(Client.DocManagementReference.Dossier dossier);
+        System.Threading.Tasks.Task<bool> DeleteDossierAsync(Client.DocReference.Dossier dossier);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetbyID", ReplyAction="http://tempuri.org/IDocumentService/GetbyIDResponse")]
-        Client.DocManagementReference.Dossier GetbyID(int dossierID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetDossierbyId", ReplyAction="http://tempuri.org/IDocumentService/GetDossierbyIdResponse")]
+        Client.DocReference.Dossier GetDossierbyId(int dossierId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetbyID", ReplyAction="http://tempuri.org/IDocumentService/GetbyIDResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> GetbyIDAsync(int dossierID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddDocumentToDossier", ReplyAction="http://tempuri.org/IDocumentService/AddDocumentToDossierResponse")]
-        Client.DocManagementReference.Document AddDocumentToDossier(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetDossierbyId", ReplyAction="http://tempuri.org/IDocumentService/GetDossierbyIdResponse")]
+        System.Threading.Tasks.Task<Client.DocReference.Dossier> GetDossierbyIdAsync(int dossierId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddDocumentToDossier", ReplyAction="http://tempuri.org/IDocumentService/AddDocumentToDossierResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Document> AddDocumentToDossierAsync(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document);
+        Client.DocReference.Document AddDocumentToDossier(Client.DocReference.Dossier dossier, Client.DocReference.Document document);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddDocumentToDossier", ReplyAction="http://tempuri.org/IDocumentService/AddDocumentToDossierResponse")]
+        System.Threading.Tasks.Task<Client.DocReference.Document> AddDocumentToDossierAsync(Client.DocReference.Dossier dossier, Client.DocReference.Document document);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditDocument", ReplyAction="http://tempuri.org/IDocumentService/EditDocumentResponse")]
-        Client.DocManagementReference.Document EditDocument(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document);
+        Client.DocReference.Document EditDocument(Client.DocReference.Dossier dossier, Client.DocReference.Document document);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditDocument", ReplyAction="http://tempuri.org/IDocumentService/EditDocumentResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Document> EditDocumentAsync(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document);
+        System.Threading.Tasks.Task<Client.DocReference.Document> EditDocumentAsync(Client.DocReference.Dossier dossier, Client.DocReference.Document document);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteDocument", ReplyAction="http://tempuri.org/IDocumentService/DeleteDocumentResponse")]
-        bool DeleteDocument(Client.DocManagementReference.Document document);
+        bool DeleteDocument(Client.DocReference.Document document);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteDocument", ReplyAction="http://tempuri.org/IDocumentService/DeleteDocumentResponse")]
-        System.Threading.Tasks.Task<bool> DeleteDocumentAsync(Client.DocManagementReference.Document document);
+        System.Threading.Tasks.Task<bool> DeleteDocumentAsync(Client.DocReference.Document document);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllDocuments", ReplyAction="http://tempuri.org/IDocumentService/GetAllDocumentsResponse")]
+        Client.DocReference.Document[] GetAllDocuments();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllDocuments", ReplyAction="http://tempuri.org/IDocumentService/GetAllDocumentsResponse")]
+        System.Threading.Tasks.Task<Client.DocReference.Document[]> GetAllDocumentsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllDocumentsByDosId", ReplyAction="http://tempuri.org/IDocumentService/GetAllDocumentsByDosIdResponse")]
+        Client.DocReference.Document[] GetAllDocumentsByDosId(int dosId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllDocumentsByDosId", ReplyAction="http://tempuri.org/IDocumentService/GetAllDocumentsByDosIdResponse")]
+        System.Threading.Tasks.Task<Client.DocReference.Document[]> GetAllDocumentsByDosIdAsync(int dosId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllKeywords", ReplyAction="http://tempuri.org/IDocumentService/GetAllKeywordsResponse")]
-        Client.DocManagementReference.Keyword[] GetAllKeywords();
+        Client.DocReference.Keyword[] GetAllKeywords();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllKeywords", ReplyAction="http://tempuri.org/IDocumentService/GetAllKeywordsResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Keyword[]> GetAllKeywordsAsync();
+        System.Threading.Tasks.Task<Client.DocReference.Keyword[]> GetAllKeywordsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddNewKeyword", ReplyAction="http://tempuri.org/IDocumentService/AddNewKeywordResponse")]
-        Client.DocManagementReference.Keyword AddNewKeyword(Client.DocManagementReference.Keyword keyword);
+        Client.DocReference.Keyword AddNewKeyword(Client.DocReference.Keyword keyword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/AddNewKeyword", ReplyAction="http://tempuri.org/IDocumentService/AddNewKeywordResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Keyword> AddNewKeywordAsync(Client.DocManagementReference.Keyword keyword);
+        System.Threading.Tasks.Task<Client.DocReference.Keyword> AddNewKeywordAsync(Client.DocReference.Keyword keyword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditKeyword", ReplyAction="http://tempuri.org/IDocumentService/EditKeywordResponse")]
-        Client.DocManagementReference.Keyword EditKeyword(Client.DocManagementReference.Keyword keyword);
+        Client.DocReference.Keyword EditKeyword(Client.DocReference.Keyword keyword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/EditKeyword", ReplyAction="http://tempuri.org/IDocumentService/EditKeywordResponse")]
-        System.Threading.Tasks.Task<Client.DocManagementReference.Keyword> EditKeywordAsync(Client.DocManagementReference.Keyword keyword);
+        System.Threading.Tasks.Task<Client.DocReference.Keyword> EditKeywordAsync(Client.DocReference.Keyword keyword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteKeyword", ReplyAction="http://tempuri.org/IDocumentService/DeleteKeywordResponse")]
-        bool DeleteKeyword(Client.DocManagementReference.Keyword keyword);
+        bool DeleteKeyword(Client.DocReference.Keyword keyword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/DeleteKeyword", ReplyAction="http://tempuri.org/IDocumentService/DeleteKeywordResponse")]
-        System.Threading.Tasks.Task<bool> DeleteKeywordAsync(Client.DocManagementReference.Keyword keyword);
+        System.Threading.Tasks.Task<bool> DeleteKeywordAsync(Client.DocReference.Keyword keyword);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllKeywordsByDocId", ReplyAction="http://tempuri.org/IDocumentService/GetAllKeywordsByDocIdResponse")]
+        Client.DocReference.Keyword[] GetAllKeywordsByDocId(int docId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetAllKeywordsByDocId", ReplyAction="http://tempuri.org/IDocumentService/GetAllKeywordsByDocIdResponse")]
+        System.Threading.Tasks.Task<Client.DocReference.Keyword[]> GetAllKeywordsByDocIdAsync(int docId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetKeywordbyId", ReplyAction="http://tempuri.org/IDocumentService/GetKeywordbyIdResponse")]
+        Client.DocReference.Keyword GetKeywordbyId(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDocumentService/GetKeywordbyId", ReplyAction="http://tempuri.org/IDocumentService/GetKeywordbyIdResponse")]
+        System.Threading.Tasks.Task<Client.DocReference.Keyword> GetKeywordbyIdAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IDocumentServiceChannel : Client.DocManagementReference.IDocumentService, System.ServiceModel.IClientChannel {
+    public interface IDocumentServiceChannel : Client.DocReference.IDocumentService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DocumentServiceClient : System.ServiceModel.ClientBase<Client.DocManagementReference.IDocumentService>, Client.DocManagementReference.IDocumentService {
+    public partial class DocumentServiceClient : System.ServiceModel.ClientBase<Client.DocReference.IDocumentService>, Client.DocReference.IDocumentService {
         
         public DocumentServiceClient() {
         }
@@ -426,100 +466,132 @@ namespace Client.DocManagementReference {
                 base(binding, remoteAddress) {
         }
         
-        public Client.DocManagementReference.Dossier[] GetAllDossiers() {
+        public Client.DocReference.Dossier[] GetAllDossiers() {
             return base.Channel.GetAllDossiers();
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Dossier[]> GetAllDossiersAsync() {
+        public System.Threading.Tasks.Task<Client.DocReference.Dossier[]> GetAllDossiersAsync() {
             return base.Channel.GetAllDossiersAsync();
         }
         
-        public Client.DocManagementReference.Dossier AddNewDossier() {
-            return base.Channel.AddNewDossier();
+        public Client.DocReference.Dossier AddNewDossier(Client.DocReference.Dossier dossier) {
+            return base.Channel.AddNewDossier(dossier);
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> AddNewDossierAsync() {
-            return base.Channel.AddNewDossierAsync();
+        public System.Threading.Tasks.Task<Client.DocReference.Dossier> AddNewDossierAsync(Client.DocReference.Dossier dossier) {
+            return base.Channel.AddNewDossierAsync(dossier);
         }
         
-        public Client.DocManagementReference.Dossier EditDossier(Client.DocManagementReference.Dossier dossier) {
-            return base.Channel.EditDossier(dossier);
+        public Client.DocReference.Dossier EditDossier(Client.DocReference.Dossier dossier, string name, string comment) {
+            return base.Channel.EditDossier(dossier, name, comment);
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> EditDossierAsync(Client.DocManagementReference.Dossier dossier) {
-            return base.Channel.EditDossierAsync(dossier);
+        public System.Threading.Tasks.Task<Client.DocReference.Dossier> EditDossierAsync(Client.DocReference.Dossier dossier, string name, string comment) {
+            return base.Channel.EditDossierAsync(dossier, name, comment);
         }
         
-        public bool DeleteDossier(Client.DocManagementReference.Dossier dossier) {
+        public bool DeleteDossier(Client.DocReference.Dossier dossier) {
             return base.Channel.DeleteDossier(dossier);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteDossierAsync(Client.DocManagementReference.Dossier dossier) {
+        public System.Threading.Tasks.Task<bool> DeleteDossierAsync(Client.DocReference.Dossier dossier) {
             return base.Channel.DeleteDossierAsync(dossier);
         }
         
-        public Client.DocManagementReference.Dossier GetbyID(int dossierID) {
-            return base.Channel.GetbyID(dossierID);
+        public Client.DocReference.Dossier GetDossierbyId(int dossierId) {
+            return base.Channel.GetDossierbyId(dossierId);
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Dossier> GetbyIDAsync(int dossierID) {
-            return base.Channel.GetbyIDAsync(dossierID);
+        public System.Threading.Tasks.Task<Client.DocReference.Dossier> GetDossierbyIdAsync(int dossierId) {
+            return base.Channel.GetDossierbyIdAsync(dossierId);
         }
         
-        public Client.DocManagementReference.Document AddDocumentToDossier(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document) {
+        public Client.DocReference.Document AddDocumentToDossier(Client.DocReference.Dossier dossier, Client.DocReference.Document document) {
             return base.Channel.AddDocumentToDossier(dossier, document);
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Document> AddDocumentToDossierAsync(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document) {
+        public System.Threading.Tasks.Task<Client.DocReference.Document> AddDocumentToDossierAsync(Client.DocReference.Dossier dossier, Client.DocReference.Document document) {
             return base.Channel.AddDocumentToDossierAsync(dossier, document);
         }
         
-        public Client.DocManagementReference.Document EditDocument(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document) {
+        public Client.DocReference.Document EditDocument(Client.DocReference.Dossier dossier, Client.DocReference.Document document) {
             return base.Channel.EditDocument(dossier, document);
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Document> EditDocumentAsync(Client.DocManagementReference.Dossier dossier, Client.DocManagementReference.Document document) {
+        public System.Threading.Tasks.Task<Client.DocReference.Document> EditDocumentAsync(Client.DocReference.Dossier dossier, Client.DocReference.Document document) {
             return base.Channel.EditDocumentAsync(dossier, document);
         }
         
-        public bool DeleteDocument(Client.DocManagementReference.Document document) {
+        public bool DeleteDocument(Client.DocReference.Document document) {
             return base.Channel.DeleteDocument(document);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteDocumentAsync(Client.DocManagementReference.Document document) {
+        public System.Threading.Tasks.Task<bool> DeleteDocumentAsync(Client.DocReference.Document document) {
             return base.Channel.DeleteDocumentAsync(document);
         }
         
-        public Client.DocManagementReference.Keyword[] GetAllKeywords() {
+        public Client.DocReference.Document[] GetAllDocuments() {
+            return base.Channel.GetAllDocuments();
+        }
+        
+        public System.Threading.Tasks.Task<Client.DocReference.Document[]> GetAllDocumentsAsync() {
+            return base.Channel.GetAllDocumentsAsync();
+        }
+        
+        public Client.DocReference.Document[] GetAllDocumentsByDosId(int dosId) {
+            return base.Channel.GetAllDocumentsByDosId(dosId);
+        }
+        
+        public System.Threading.Tasks.Task<Client.DocReference.Document[]> GetAllDocumentsByDosIdAsync(int dosId) {
+            return base.Channel.GetAllDocumentsByDosIdAsync(dosId);
+        }
+        
+        public Client.DocReference.Keyword[] GetAllKeywords() {
             return base.Channel.GetAllKeywords();
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Keyword[]> GetAllKeywordsAsync() {
+        public System.Threading.Tasks.Task<Client.DocReference.Keyword[]> GetAllKeywordsAsync() {
             return base.Channel.GetAllKeywordsAsync();
         }
         
-        public Client.DocManagementReference.Keyword AddNewKeyword(Client.DocManagementReference.Keyword keyword) {
+        public Client.DocReference.Keyword AddNewKeyword(Client.DocReference.Keyword keyword) {
             return base.Channel.AddNewKeyword(keyword);
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Keyword> AddNewKeywordAsync(Client.DocManagementReference.Keyword keyword) {
+        public System.Threading.Tasks.Task<Client.DocReference.Keyword> AddNewKeywordAsync(Client.DocReference.Keyword keyword) {
             return base.Channel.AddNewKeywordAsync(keyword);
         }
         
-        public Client.DocManagementReference.Keyword EditKeyword(Client.DocManagementReference.Keyword keyword) {
+        public Client.DocReference.Keyword EditKeyword(Client.DocReference.Keyword keyword) {
             return base.Channel.EditKeyword(keyword);
         }
         
-        public System.Threading.Tasks.Task<Client.DocManagementReference.Keyword> EditKeywordAsync(Client.DocManagementReference.Keyword keyword) {
+        public System.Threading.Tasks.Task<Client.DocReference.Keyword> EditKeywordAsync(Client.DocReference.Keyword keyword) {
             return base.Channel.EditKeywordAsync(keyword);
         }
         
-        public bool DeleteKeyword(Client.DocManagementReference.Keyword keyword) {
+        public bool DeleteKeyword(Client.DocReference.Keyword keyword) {
             return base.Channel.DeleteKeyword(keyword);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteKeywordAsync(Client.DocManagementReference.Keyword keyword) {
+        public System.Threading.Tasks.Task<bool> DeleteKeywordAsync(Client.DocReference.Keyword keyword) {
             return base.Channel.DeleteKeywordAsync(keyword);
+        }
+        
+        public Client.DocReference.Keyword[] GetAllKeywordsByDocId(int docId) {
+            return base.Channel.GetAllKeywordsByDocId(docId);
+        }
+        
+        public System.Threading.Tasks.Task<Client.DocReference.Keyword[]> GetAllKeywordsByDocIdAsync(int docId) {
+            return base.Channel.GetAllKeywordsByDocIdAsync(docId);
+        }
+        
+        public Client.DocReference.Keyword GetKeywordbyId(int id) {
+            return base.Channel.GetKeywordbyId(id);
+        }
+        
+        public System.Threading.Tasks.Task<Client.DocReference.Keyword> GetKeywordbyIdAsync(int id) {
+            return base.Channel.GetKeywordbyIdAsync(id);
         }
     }
 }

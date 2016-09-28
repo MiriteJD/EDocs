@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel.Security.Tokens;
-using System.Text;
-using System.Threading.Tasks;
+using System.ServiceModel.Channels;
+using System.Windows;
+using Client.Container;
 
 namespace Client.Controller
 {
-    using DocManagementReference;
     using Views;
     using ViewModels;
+    using Framework;
+    using DocReference;
 
     public class MainWindowController
     {
@@ -17,94 +16,161 @@ namespace Client.Controller
         private MainViewModel _viewModel;
         private Program _program;
 
-
-
-
-
         public MainWindowController()
         {
             _program = Program.Instance;
-            _viewModel = new MainViewModel();
-            _view = new MainWindow();
-            //_view.DataContext = _viewModel;
-            _view = new MainWindow();
-            //_view.listBox.DataContext = _program.GetAllDossiers();
+
+
+            _viewModel = new MainViewModel()
+            {
+                Dossiers = _program.GetAllDossiers(),
+                AddDossierCommand =  new RelayCommand(AddDossier,CanAddDos),
+                DeleteDossierCommand = new RelayCommand(DeleteDossier,CanDeleteDossier),
+                AddDocumentCommand = new RelayCommand(AddDoc,CanAddDoc),
+                DeleteDocumentCommand = new RelayCommand(DeleteDocument,CanDeleteDossier),
+                OpenKwViewCommand = new RelayCommand(OpenKwView)
+
+                
+            };
+
+            _viewModel.SelectedDossier = _viewModel.Dossiers[0];
+
+
+            //Test ob Doc einem Dos zugeordnet werden kann
+            //var doc = new DocContainer("new doc");
+            //_viewModel.Dossiers[1].AddDoc(doc);
+
+            _view = new MainWindow()
+            {
+                DataContext = _viewModel
+            };
+
 
             _view.ShowDialog();
+        }
 
-
-
+        #region DOS
+        private void AddDossier(object obj)
+        {
+            var dos = _program.AddnewDos();
+            if (dos != null)
+            {
+                _viewModel.Dossiers.Add(dos);
+            }
         }
 
 
+        private bool CanAddDos(object obj)
+        {
+            return _viewModel.SelectedDossier != null;
+        }
+
+
+        private bool CanDeleteDossier(object obj)
+        {
+            return _viewModel.SelectedDossier != null;
+        }
+
+
+        private void DeleteDossier(object obj)
+        {
+            try
+            {
+
+                var messageResult = MessageBox.Show("Wollen Sie die Akte wirklich löschen?", "Sie sind im Begriff eine Aktion auszuführen",
+                    MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (messageResult == MessageBoxResult.Yes)
+                {
+                    if (_program.DeleteDossier(_viewModel.SelectedDossier))
+                    {
+                        _viewModel.Dossiers.Remove(_viewModel.SelectedDossier);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+            }
+           
+        }
+        #endregion
+
+        #region DOC
+        private void DeleteDocument(object obj)
+        {
+            try
+            {
+                var messageResult = MessageBox.Show("Wollen Sie das Dokument wirklich löschen?", "Sie sind im Begriff eine Aktion auszuführen",
+                      MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (messageResult == MessageBoxResult.Yes)
+                {
+                    if (_program.DeleteDocument(_viewModel.SelectedDocument))
+                    {
+                        _viewModel.Documents.Remove(_viewModel.SelectedDocument);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+            }
+
+        }
+     
+        private void AddDoc(object obj)
+        {
+            var model = new Document
+            {
+                CreationDate = DateTime.Now,
+                Comment = "Neues Dokument",
+                Version = 1,
+
+            };
+            var doc = _program.AddnewDoc(new DocContainer(model), _viewModel.SelectedDossier);
+            _viewModel.Documents.Add(doc);
+        }
+
+
+        private bool CanAddDoc(object obj)
+        {
+            return _viewModel.SelectedDocument != null;
+        }
+       
+
+
+        private bool CanDeleteDoc(object obj)
+        {
+            return _viewModel.SelectedDocument != null;
+        }
+
+
+        #endregion
+
+        #region KW
+
+        private void OpenKwView(object obj)
+        {
+            try
+            {
+                KeywordsWindow window = new KeywordsWindow();
+                window.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+            }
+        }
+
+
+        #endregion
 
 
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="obj"></param>
-        //private void AddTaskList(object obj)
-        //{
-        //    var tasklist = _program.Add();
-        //    if (tasklist != null)
-        //    {
-        //        _viewModel.Add(tasklist);
-        //    }
-        //}
 
-        ///// <summary>
-        ///// Command Enable Funktion zum AddTaskCommand
-        ///// 
-        ///// </summary>
-        ///// <param name="obj"></param>
-        ///// <returns> </returns>
-        //private bool CanAddTask(object obj)
-        //{
-        //    return _viewModel.SelectedTasklist != null;
-        //}
 
-        ///// <summary>
-        ///// Command Funktion zum Hinzufügen eines neuen Task
-        ///// </summary>
-        ///// <param name="obj"></param>
-        //private void AddTask(object obj)
-        //{
-        //    var model = new Task
-        //    {
-        //        CreationDate = DateTime.Now,
-        //        Description = "Neue Aufgabe",
-        //        Priority = 2,
-        //        ReminderMinutes = -1,
-        //        Version = 1,
-        //        State = false
-        //    };
-
-        //    var task = _dataService.AddTaskToList(_viewModel.SelectedTasklist, new TaskContainer(model, _viewModel.SelectedTasklist));
-        //    _viewModel.SelectedTasklist.AddTask(task);
-        //}
-
-        ///// <summary>
-        /////  Command Enable Funktion zum DeleteTaskListCommand
-        ///// </summary>
-        ///// <param name="obj"></param>
-        ///// <returns>enable bool</returns>
-        //private bool CanDeleteTaskList(object obj)
-        //{
-        //    return _viewModel.SelectedTasklist != null;
-        //}
-
-        ///// <summary>
-        ///// Command Funktion zum löschen einer TaskListe
-        ///// </summary>
-        ///// <param name="obj"></param>
-        //private void DeleteTaskList(object obj)
-        //{
-        //    if (_dataService.DeleteTasklist(_viewModel.SelectedTasklist))
-        //    {
-        //        _viewModel.TaskLists.Remove(_viewModel.SelectedTasklist);
-        //    }
-        //}
 
 
     }

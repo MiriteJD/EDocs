@@ -18,6 +18,7 @@ namespace Server
         public DocumentService()
         {
             var relativePath = @"Database\DocManager.db3";
+            //
             string currentPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\"));
             var absolutePath = Path.Combine(currentPath, relativePath);
 

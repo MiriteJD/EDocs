@@ -7,7 +7,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using Client.Controller;
-using Client.DocManagementReference;
+using Client.DocReference;
 
 namespace Client
 {

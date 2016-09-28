@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Client.Framework
 {
-    public abstract class Npc : INotifyPropertyChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
         protected bool ThrowOnInvalidPropertyName { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-       // [NotifyPropertyChangedInvocator]
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             VerifyPropertyName(propertyName);

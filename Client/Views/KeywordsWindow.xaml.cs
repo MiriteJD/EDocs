@@ -10,33 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TestApplication.ServiceReference;
 
-namespace TestApplication
+namespace Client.Views
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// Interaction logic for KeywordsWindow.xaml
     /// </summary>
-    public partial class leCOntrol 
+    public partial class KeywordsWindow : Window
     {
-        public leCOntrol()
+        public KeywordsWindow()
         {
             InitializeComponent();
-
-            var test = new DocumentServiceClient();
-
-
-            Items = test.GetAllDossiers();
-
         }
-
-        public static IList<Dossier> Items { get; set; }
-
-
-
-
     }
-
 }

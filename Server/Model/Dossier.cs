@@ -11,7 +11,7 @@ namespace Server.Model
         public string Nr { get; set; }
 
         [DataMember]
-        public int  Counter { get; set; }
+        public int Counter { get; set; }
 
         [DataMember]
         public int Year { get; set; }
@@ -25,7 +25,7 @@ namespace Server.Model
         [DataMember]
         public DateTime CreationDate { get; set; }
 
-       
+        [DataMember]
         public IList<Document> Documents { get; set; }
 
         public void AddDocument(Document document)
@@ -34,16 +34,18 @@ namespace Server.Model
             {
                 Documents = new List<Document>();
             }
-            document.DossierId = this.Id;
-            var newList = new List<Document>();
-            foreach (var documentinList in Documents)
-            {
-                documentinList.DossierId = this.Id;
-                newList.Add(documentinList);
-            }
-            newList.Add(document);
-            Documents = newList;
-        }
+            document.DossierList = this;
 
+            Documents.Add(document);
+            //    Insert(Documents.Count,document);
+            //var newList = new List<Document>();
+            //foreach (var doc in Documents)
+            //{
+            //    doc.DossierList = this;
+            //    newList.Add(doc);
+            //}
+            //newList.Add(document);
+            //Documents = newList;
+        }
     }
 }

@@ -8,10 +8,11 @@ namespace Client
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using DocManagementReference;
+    using DocReference;
     public class Program
     {
         private readonly DocumentServiceClient _serviceReference;
+        
 
         /// <summary>
         /// Konstruktor
@@ -36,6 +37,10 @@ namespace Client
             }
         }
 
+
+        //Connect Service Reference --> local Instace
+
+        #region KW
         /// <summary>
         /// adds a new keyword
         /// </summary>
@@ -99,6 +104,23 @@ namespace Client
             }
         }
 
+        public ObservableCollection<KeywordContainer> GetAllKeywords()
+        {
+            try
+            {
+                var allKwService = _serviceReference.GetAllKeywords();
+                return new ObservableCollection<KeywordContainer>(allKwService.Select(kwList => new KeywordContainer(kwList)).ToList());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+                return null;
+            }
+        }
+        #endregion KW
+
+
         #region DOSSIERS
 
 
@@ -121,8 +143,12 @@ namespace Client
         {
             try
             {
-                //
-                var addDosService = _serviceReference.AddNewDossier();
+                var dos = new Dossier()
+                {
+                    Name = "Neue Akte"
+
+                };
+                var addDosService = _serviceReference.AddNewDossier(dos);
                 return new DosContainer(addDosService);
             }
             catch (Exception ex)
@@ -134,8 +160,41 @@ namespace Client
         }
 
 
-        #endregion
+        public DosContainer UpdateDossier(DosContainer dossier)
+        {
+            try
+            {
+                //var updateDosService = _serviceReference.EditDossier(dossier.Instanz,dossier.Name,)
+                return null;
+                //new DosContainer(updateDosService);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+                return null;
+            }
+        }
 
+        public bool DeleteDossier(DosContainer dossier)
+        {
+            try
+            {
+                if (_serviceReference.DeleteDossier(dossier.Instanz))
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+                return false;
+            }
+            return false;
+        }
+
+
+
+        #endregion
 
 
         #region DOCUMENTS
@@ -168,6 +227,38 @@ namespace Client
                 return null;
             }
         }
+
+        public ObservableCollection<DocContainer> GetDocumentsByDossier(DosContainer dossier)
+        {
+            try
+            {
+                var allDocService = _serviceReference.GetAllDocumentsByDosId(dossier.Instanz.Id);
+                return new ObservableCollection<DocContainer>(allDocService.Select(docList => new DocContainer(docList)).ToList());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+                return new ObservableCollection<DocContainer>();
+            }
+        }
+
+        public bool DeleteDocument(DocContainer document)
+        {
+            try
+            {
+                if (_serviceReference.DeleteDocument(document.Instanz))
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+                return false;
+            }
+            return false;
+        }
+
 
 
         #endregion

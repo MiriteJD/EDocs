@@ -1,8 +1,6 @@
-﻿
-
-namespace Client.Container
+﻿namespace Client.Container
 {
-    using Client.DocManagementReference;
+    using DocReference;
     public class DocContainer
     {
         public DocContainer(Document document)

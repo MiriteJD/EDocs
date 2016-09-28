@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client.Container
 {
-    using Client.DocManagementReference;
+    using DocReference;
     public class KeywordContainer
     {
 
