@@ -1,5 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
 using Client.Container;
+using Microsoft.Win32;
 
 namespace Client
 {
@@ -12,7 +15,7 @@ namespace Client
     public class Program
     {
         private readonly DocumentServiceClient _serviceReference;
-        
+
 
         /// <summary>
         /// Konstruktor
@@ -20,12 +23,14 @@ namespace Client
         private Program()
         {
             _serviceReference = new DocumentServiceClient();
+
+            
         }
 
         private static Program _instanz;
 
-      
-		public static Program Instance
+
+        public static Program Instance
         {
             get
             {
@@ -37,7 +42,7 @@ namespace Client
             }
         }
 
-
+        
         //Connect Service Reference --> local Instace
 
         #region KW

@@ -45,7 +45,7 @@ namespace Client.Container
             }
         }
 
-      
+
 
         public int Version
         {
@@ -57,6 +57,12 @@ namespace Client.Container
             {
                 Instanz.Version = value;
             }
+        }
+
+        public string Value
+        {
+            get { return Instanz.Value; }
+            set { Instanz.Value = value; }
         }
 
 

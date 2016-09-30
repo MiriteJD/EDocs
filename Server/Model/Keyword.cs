@@ -11,6 +11,9 @@ namespace Server.Model
         public string Name { get; set; }
 
         public IList<Document> Documents { get; set; }
+
+        [DataMember]
+        public string Value { get; set; }
     }
 }
 

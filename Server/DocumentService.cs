@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using System.Net.Mime;
+using System.Reflection;
 using Server.Model;
 
 namespace Server
@@ -15,20 +18,79 @@ namespace Server
 
         private readonly KeywordRepository _keywordRepository;
 
+        private string _path;
+
         public DocumentService()
         {
             var relativePath = @"Database\DocManager.db3";
-            //
             string currentPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\"));
             var absolutePath = Path.Combine(currentPath, relativePath);
 
             _dossierRepository = new DossierRepository(absolutePath);
             _documentRepository = new DocumentRepository(absolutePath);
             _keywordRepository = new KeywordRepository(absolutePath);
+            try
+            {
+                //create directory
+                //if (!Directory.Exists(Path.Combine(currentPath, @"/Dossiers&Documents")))
+                //{
+
+                //    foreach (var dos in GetAllDossiers())
+                //    {
+                //        if (!Directory.Exists(Path.Combine(Path.Combine(currentPath, @"/"), dos.Year + dos.Nr)))
+                //        {
+                //            var currentFolderPath = Path.Combine(Path.Combine(currentPath, @"/"), dos.Year + dos.Nr);
+                //            Directory.CreateDirectory(currentFolderPath);
+                //            foreach (var doc in GetDossierbyId(dos.Id).Documents)
+                //            {
+                //                var newdocname = Guid.NewGuid().ToString() + ".doc";
+                //                var fulldirectory = Path.Combine(currentFolderPath, newdocname);
+                //                using (var stream = new FileStream(fulldirectory, FileMode.Create))
+                //                {
+                //                    stream.WriteByte(2);
+                //                }
+                //                doc.Path = newdocname;
+                //            }
+                //        }
+                //        Directory.CreateDirectory(Path.Combine(currentPath, @"/Dossiers&Documents"));
+                //        Directory.CreateDirectory(Path.Combine(currentPath, @"/Dossiers&Documents"));
+                //    }
+                //}
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+            }
         }
 
+        private void CreateDirectory(string currentPath)
+        {
+            try
+            {
+                var dossiers = GetAllDossiers();
+                foreach (var dos in dossiers)
+                {
+                    Directory.CreateDirectory(Path.Combine(Path.Combine(currentPath, @"/"), dos.Year + dos.Nr));
+                }
+
+                Directory.CreateDirectory(Path.Combine(currentPath, @"/Dossiers&Documents"));
+                Directory.CreateDirectory(Path.Combine(currentPath, @"/Dossiers&Documents"));
+                Directory.CreateDirectory(Path.Combine(currentPath, @"/Dossiers&Documents"));
+                Directory.CreateDirectory(Path.Combine(currentPath, @"/Dossiers&Documents"));
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+            }
+        }
+
+
         #region DOSSIERS
-        public IList<Dossier> GetAllDossiers()
+        public
+        IList<Dossier> GetAllDossiers()
         {
             try
             {

@@ -16,6 +16,10 @@ namespace Client.ViewModels
 
         private DocContainer _selectedDocument;
 
+        private KeywordContainer _selectedKeyword;
+
+        private ObservableCollection<KeywordContainer> _currentKeywords;
+
 
         #region DOS
         public ObservableCollection<DosContainer> Dossiers
@@ -42,8 +46,6 @@ namespace Client.ViewModels
             {
                 _selectedDossier = value;
                 OnPropertyChanged();
-                //bool isnull = SelectedDossier != null;
-                //OnPropertyChanged(nameof(isnull));
 
 
             }
@@ -77,8 +79,37 @@ namespace Client.ViewModels
             {
                 _selectedDocument = value;
                 OnPropertyChanged();
-                //bool isnull = SelectedDocument != null;
-                //OnPropertyChanged(nameof(isnull));
+            }
+        }
+
+
+        #endregion
+
+        #region KW
+        public ObservableCollection<KeywordContainer> Keywords
+        {
+            get
+            {
+                return _currentKeywords;
+            }
+            set
+            {
+                _currentKeywords = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        public KeywordContainer SelectedKeyword
+        {
+            get
+            {
+                return _selectedKeyword;
+            }
+            set
+            {
+                _selectedKeyword = value;
+                OnPropertyChanged();
             }
         }
 

@@ -1,4 +1,8 @@
-﻿namespace Client.Container
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+
+namespace Client.Container
 {
     using DocReference;
     public class DocContainer
@@ -13,7 +17,7 @@
             Instanz = new Document();
             Filename = name;
             Version = 1;
-            
+
         }
 
         public Document Instanz { get; set; }
@@ -27,6 +31,21 @@
             set
             {
                 Instanz.Filename = value;
+            }
+        }
+
+        public ObservableCollection<KeywordContainer> Keywords
+        {
+            get
+            {
+                return new ObservableCollection<KeywordContainer>(Instanz.Keywords.Select(kwList => new KeywordContainer(kwList)).ToList()); ;
+            }
+            set
+            {
+                foreach (var val in value)
+                {
+                    //TODO implement
+                }
             }
         }
 

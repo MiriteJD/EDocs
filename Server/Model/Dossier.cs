@@ -26,7 +26,7 @@ namespace Server.Model
         public DateTime CreationDate { get; set; }
 
         [DataMember]
-        public IList<Document> Documents { get; set; }
+        public List<Document> Documents { get; set; }
 
         public void AddDocument(Document document)
         {
@@ -34,18 +34,15 @@ namespace Server.Model
             {
                 Documents = new List<Document>();
             }
-            document.DossierList = this;
-
             Documents.Add(document);
-            //    Insert(Documents.Count,document);
-            //var newList = new List<Document>();
-            //foreach (var doc in Documents)
-            //{
-            //    doc.DossierList = this;
-            //    newList.Add(doc);
-            //}
-            //newList.Add(document);
-            //Documents = newList;
+
+            var newList = new List<Document>();
+            foreach (var doc in Documents)
+            {
+                doc.DossierId = this.Id;
+                newList.Add(doc);
+            }
+            Documents = newList;
         }
     }
 }

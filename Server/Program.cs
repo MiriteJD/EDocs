@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.IO;
 using System.ServiceModel;
 using Server.Model;
 using Server;
@@ -22,24 +24,43 @@ namespace Server
                                   + "If you want to stop the service press --Enter--" + "\r\n" + "\r\n");
 
 
-                //DocumentService service = new DocumentService();
+                DocumentService service = new DocumentService();
 
+
+                //var currentPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\"));
+                //var appPath = Path.Combine(currentPath, "app.config");
+                //var _path = ConfigurationManager.AppSettings["DossierPath"];
+                //if (_path == null)
+                //{
+                //    Configuration config = ConfigurationManager.OpenExeConfiguration(appPath);
+
+                //    config.AppSettings.Settings.Add("DossierPath", Directory.GetCurrentDirectory());
+
+                //    config.Save(ConfigurationSaveMode.Modified);
+
+                //    ConfigurationManager.RefreshSection("appSettings");
+                //}
+
+                //test KW
                 //var teskw = new Keyword();
-                //var all = service.GetAllDossiers();
-                //foreach (var kw in all)
-                //{
-                //   Console.WriteLine(kw.Documents.Count);
-                //}
+                //service.AddNewKeyword(teskw);
 
-                //var all = service.GetAllKeywords();
-                //foreach (var kw in all)
+                //var allkw = service.GetAllKeywords();
+                //foreach (var kw in allkw)
                 //{
-                //    if (kw.Id == 6) teskw = kw;
+                //    Console.WriteLine("kw:  : " + kw.Name);
                 //}
-
                 //var result = service.DeleteKeyword(teskw);
-
                 //Console.WriteLine("deleting test kw3(1) status : " + result);
+
+                //test DOS
+               
+                var alldos = service.GetAllDossiers();
+                foreach (var d in alldos)
+                {
+                    Console.WriteLine("kw:  : " + d.Name);
+                }
+
 
 
                 Console.ReadLine();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ServiceModel.Channels;
 using System.Windows;
 using Client.Container;
@@ -27,13 +28,13 @@ namespace Client.Controller
                 AddDossierCommand =  new RelayCommand(AddDossier,CanAddDos),
                 DeleteDossierCommand = new RelayCommand(DeleteDossier,CanDeleteDossier),
                 AddDocumentCommand = new RelayCommand(AddDoc,CanAddDoc),
-                DeleteDocumentCommand = new RelayCommand(DeleteDocument,CanDeleteDossier),
+                DeleteDocumentCommand = new RelayCommand(DeleteDocument, CanDeleteDoc),
                 OpenKwViewCommand = new RelayCommand(OpenKwView)
 
                 
             };
 
-            _viewModel.SelectedDossier = _viewModel.Dossiers[0];
+            //_viewModel.SelectedDossier = _viewModel.Dossiers[0];
 
 
             //Test ob Doc einem Dos zugeordnet werden kann
@@ -126,16 +127,22 @@ namespace Client.Controller
                 CreationDate = DateTime.Now,
                 Comment = "Neues Dokument",
                 Version = 1,
+                DossierId = _viewModel.SelectedDossier.Instanz.Id
 
             };
             var doc = _program.AddnewDoc(new DocContainer(model), _viewModel.SelectedDossier);
+            if (_viewModel.Documents == null)
+            {
+
+                _viewModel.Documents = new ObservableCollection<DocContainer>();
+            }
             _viewModel.Documents.Add(doc);
         }
 
 
         private bool CanAddDoc(object obj)
         {
-            return _viewModel.SelectedDocument != null;
+            return _viewModel.SelectedDossier != null;
         }
        
 
@@ -163,8 +170,6 @@ namespace Client.Controller
                 Console.ReadLine();
             }
         }
-
-
         #endregion
 
 

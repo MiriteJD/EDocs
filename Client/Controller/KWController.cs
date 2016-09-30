@@ -10,18 +10,20 @@ namespace Client.Controller
     {
         private readonly KeywordsWindow _kwview;
         private readonly KwViewModel _kwviewModel;
+        private Program _program;
 
         /// <summary>
         /// Constructor to bind everything together
         /// </summary>
         public KwController()
         {
+            _program = Program.Instance;
             _kwviewModel = new KwViewModel()
             {
                 AddKeywordCommand = new RelayCommand(AddKw),
                 DeleteKeywordCommand = new RelayCommand(DeleteKw, CanDeleteKw),
                 CloseCommand = new RelayCommand(Close),
-                Keywords = Program.Instance.GetAllKeywords(),
+                Keywords = _program.GetAllKeywords(),
             };
 
             _kwview = new KeywordsWindow()

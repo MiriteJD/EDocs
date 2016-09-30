@@ -18,8 +18,8 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
-        
+
+
         <!-- Documents-->
         <!-- Menu Documents-->
         <Border Margin="0" Grid.Row="0" Grid.Column="1" >
@@ -32,7 +32,7 @@
                 </Button>
                 <Button Content="Schlagworte" Height="36" VerticalAlignment="Bottom" Margin="755,0,10,-1" ToolTip="Dokument bearbeiten" Command="{Binding OpenKwViewCommand}" />
             </Grid>
-        </Border>     
+        </Border>
         <!-- View Documents-->
         <Border Margin="0" Grid.Row="1" Grid.Column="1" >
             <Grid>
@@ -84,6 +84,21 @@
                 <TextBox Grid.Row="2" Grid.Column="1"  Text="{Binding SelectedDocument.Name}" TextWrapping="Wrap" RenderTransformOrigin="0.492,-0.773"/>
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedDocument.Comment}" TextWrapping="Wrap"/>
                 <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"  Content="Bemerkung"/>
+                <!--Keywords-->
+                <ListView x:Name="DocKeywordList" ItemsSource="{Binding SelectedDocument.Keywords}" SelectedItem="{Binding SelectedKeyword}" HorizontalAlignment="Left" Height="320" Margin="10,51,0,0"  VerticalAlignment="Top" Width="878" SelectionMode="Single">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0, 0, 0, 20">
+                                <TextBlock FontWeight="UltraBold" Text="Titel und Nummer" />
+                                <StackPanel Margin="10, 0, 0, 0" Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock Text=" / " />
+                                    <TextBlock Text="{Binding Value}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListView>
 
             </Grid>
         </Border>

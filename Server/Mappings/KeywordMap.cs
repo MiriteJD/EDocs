@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentNHibernate.Mapping;
+using FluentNHibernate.Visitors;
 using Server.Model;
 
 namespace Server.Mappings
@@ -16,6 +17,7 @@ namespace Server.Mappings
                     .ParentKeyColumn("KeywordId")
                     .ChildKeyColumn("DocumentId")
                     .Inverse().Cascade.None();
+                    
 
             }
             catch (Exception ex)
