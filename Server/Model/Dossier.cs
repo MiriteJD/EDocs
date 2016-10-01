@@ -26,7 +26,7 @@ namespace Server.Model
         public DateTime CreationDate { get; set; }
 
         [DataMember]
-        public List<Document> Documents { get; set; }
+        public IList<Document> Documents { get; set; } = new List<Document>();
 
         public void AddDocument(Document document)
         {

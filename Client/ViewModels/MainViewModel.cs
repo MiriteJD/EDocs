@@ -51,9 +51,7 @@ namespace Client.ViewModels
             }
         }
         #endregion
-
-
-
+        
         #region DOC
         public ObservableCollection<DocContainer> Documents
         {

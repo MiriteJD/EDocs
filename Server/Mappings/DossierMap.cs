@@ -17,7 +17,10 @@ namespace Server.Mappings
                 Map(x => x.Name).Length(200).Not.Nullable();
                 Map(x => x.Comment).Length(500).Nullable();
                 Map(x => x.CreationDate).Not.Nullable();
-                HasMany(x => x.Documents).KeyColumn("DossierId").NotFound.Ignore().Inverse().Cascade.AllDeleteOrphan().KeyNullable();
+                //HasMany(x => x.Documents).KeyColumn("DossierId").NotFound.Ignore().Inverse().Cascade.AllDeleteOrphan();
+                //.KeyNullable()
+                
+                HasMany<Document>(x => x.Documents).KeyColumn("DossierId").Cascade.All().Inverse();
             }
             catch (Exception ex)
             {

@@ -24,7 +24,7 @@ namespace Server
                                   + "If you want to stop the service press --Enter--" + "\r\n" + "\r\n");
 
 
-                DocumentService service = new DocumentService();
+                //DocumentService service = new DocumentService();
 
 
                 //var currentPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\"));
@@ -53,13 +53,13 @@ namespace Server
                 //var result = service.DeleteKeyword(teskw);
                 //Console.WriteLine("deleting test kw3(1) status : " + result);
 
+
                 //test DOS
-               
-                var alldos = service.GetAllDossiers();
-                foreach (var d in alldos)
-                {
-                    Console.WriteLine("kw:  : " + d.Name);
-                }
+                //var alldos = service.GetAllDossiers();
+                //foreach (var d in alldos)
+                //{
+                //    Console.WriteLine("kw:  : " + d.Name);
+                //}
 
 
 

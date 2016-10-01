@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ServiceModel.Channels;
 using System.Windows;
 using Client.Container;
+using Microsoft.Win32;
 
 namespace Client.Controller
 {
@@ -25,21 +26,14 @@ namespace Client.Controller
             _viewModel = new MainViewModel()
             {
                 Dossiers = _program.GetAllDossiers(),
-                AddDossierCommand =  new RelayCommand(AddDossier,CanAddDos),
-                DeleteDossierCommand = new RelayCommand(DeleteDossier,CanDeleteDossier),
-                AddDocumentCommand = new RelayCommand(AddDoc,CanAddDoc),
+                AddDossierCommand = new RelayCommand(AddDossier, CanAddDos),
+                DeleteDossierCommand = new RelayCommand(DeleteDossier, CanDeleteDossier),
+                AddDocumentCommand = new RelayCommand(AddDoc, CanAddDoc),
                 DeleteDocumentCommand = new RelayCommand(DeleteDocument, CanDeleteDoc),
                 OpenKwViewCommand = new RelayCommand(OpenKwView)
 
-                
+
             };
-
-            //_viewModel.SelectedDossier = _viewModel.Dossiers[0];
-
-
-            //Test ob Doc einem Dos zugeordnet werden kann
-            //var doc = new DocContainer("new doc");
-            //_viewModel.Dossiers[1].AddDoc(doc);
 
             _view = new MainWindow()
             {
@@ -93,7 +87,7 @@ namespace Client.Controller
                 Console.WriteLine(ex);
                 Console.ReadLine();
             }
-           
+
         }
         #endregion
 
@@ -119,24 +113,31 @@ namespace Client.Controller
             }
 
         }
-     
+
         private void AddDoc(object obj)
         {
-            var model = new Document
+            var ofd = new OpenFileDialog();
+            ofd.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            if (ofd.ShowDialog() == true)
             {
-                CreationDate = DateTime.Now,
-                Comment = "Neues Dokument",
-                Version = 1,
-                DossierId = _viewModel.SelectedDossier.Instanz.Id
+                var model = new Document
+                {
+                    Title = ofd.Title,
+                    CreationDate = DateTime.Now,
+                    Comment = "Neues Dokument",
+                    Path = ofd.FileName,
+                    //Version = 1,
+                    DossierId = _viewModel.SelectedDossier.Instanz.Id
 
-            };
-            var doc = _program.AddnewDoc(new DocContainer(model), _viewModel.SelectedDossier);
-            if (_viewModel.Documents == null)
-            {
-
-                _viewModel.Documents = new ObservableCollection<DocContainer>();
+                };
+                var doc = _program.AddnewDoc(new DocContainer(model), _viewModel.SelectedDossier);
+                if (_viewModel.Documents == null)
+                {
+                    _viewModel.Documents = new ObservableCollection<DocContainer>();
+                }
+                _viewModel.Documents.Add(doc);
             }
-            _viewModel.Documents.Add(doc);
+
         }
 
 
@@ -144,8 +145,6 @@ namespace Client.Controller
         {
             return _viewModel.SelectedDossier != null;
         }
-       
-
 
         private bool CanDeleteDoc(object obj)
         {
